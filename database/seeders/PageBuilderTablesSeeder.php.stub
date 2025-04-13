@@ -1,0 +1,82 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class PageBuilderTablesSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // Two columns
+        $twoColumnsId = DB::table(config('page-builder.tables.block'))->insertGetId([
+            'type'       => 'layout-2',
+            'is_layout'  => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $twoColumnsId,
+            'locale'     => 'vi',
+            'name'       => 'Khối Hai cột',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-columns-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1zm9 -1v18" /></svg>',
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $twoColumnsId,
+            'locale'     => 'en',
+            'name'       => 'Two Columns',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-columns-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1zm9 -1v18" /></svg>',
+        ]);
+
+        // Three columns
+        $threeColumnsId = DB::table(config('page-builder.tables.block'))->insertGetId([
+            'type'       => 'layout-3',            
+            'is_layout'  => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $threeColumnsId,
+            'locale'     => 'vi',
+            'name'       => 'Khối Ba Cột',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-columns-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1zm6 -1v18m6 -18v18" /></svg>',
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $threeColumnsId,
+            'locale'     => 'en',
+            'name'       => 'There Columns',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-columns-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1zm6 -1v18m6 -18v18" /></svg>',
+        ]);
+
+        $textId = DB::table(config('page-builder.tables.block'))->insertGetId([
+            'type'       => 'text',
+            'is_layout'  => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $textId,
+            'locale'     => 'vi',
+            'name'       => 'Văn bản',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-text-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 10h-14" /><path d="M5 6h14" /><path d="M14 14h-9" /><path d="M5 18h6" /><path d="M18 15v6" /><path d="M15 18h6" /></svg>',
+        ]);
+
+        DB::table(config('page-builder.tables.block_translation'))->insert([
+            'block_id'   => $textId,
+            'locale'     => 'en',
+            'name'       => 'Text',
+            'icon'       => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-text-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 10h-14" /><path d="M5 6h14" /><path d="M14 14h-9" /><path d="M5 18h6" /><path d="M18 15v6" /><path d="M15 18h6" /></svg>',
+        ]);
+    }
+}

@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create(config('page-builder.tables.block_translation'), function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('block_id')->index();
+            $table->string('locale')->index();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->text('icon')->nullable();
+
+            $table->unique(['block_id', 'locale']);
+            $table->foreign('block_id')->references('id')->on(config('page-builder.tables.block'))->onDelete('cascade');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists(config('page-builder.tables.block_translation'));
+    }
+};
