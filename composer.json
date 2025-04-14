@@ -12,12 +12,14 @@
     "require-dev": {
         "orchestra/testbench": "^8.0",
         "squizlabs/php_codesniffer": "^3.11",
-        "pestphp/pest": "^2.36"
+        "phpunit/phpunit": "^10.5",
+        "jaschilz/php-coverage-badger": "^2.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Thinhnx\\LaravelPageBuilder\\": "src"
+            "Thinhnx\\LaravelPageBuilder\\": "src",
+            "Thinhnx\\LaravelPageBuilder\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
@@ -47,7 +49,7 @@
         }
     },
     "scripts": {
-        "test": "pest",
+        "test": "phpunit",
         "phpcs": "phpcs",
         "phpcbf": "phpcbf"
     }

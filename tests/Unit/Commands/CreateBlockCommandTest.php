@@ -11,11 +11,16 @@ class CreateBlockCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        $this->refreshApplication();
+        $this->cleanFiles();
+        parent::setUp();
+        $this->initialize();
+    }
+
     public function test_create_new_block()
     {
-        $this->cleanFiles();
-        $this->initialize();
-
         $command = $this->artisan('page-builder:block:create');
 
         foreach (config('page-builder.locales') as $locale) {
@@ -43,15 +48,10 @@ class CreateBlockCommandTest extends TestCase
             'name'   => 'Slider',
             'locale' => 'vi'
         ]);
-
-        $this->cleanFiles();
     }
 
     public function test_create_new_block_with_existed_type()
     {
-        $this->cleanFiles();
-        $this->initialize();
-
         $command = $this->artisan('page-builder:block:create');
 
         foreach (config('page-builder.locales') as $locale) {
@@ -81,7 +81,5 @@ class CreateBlockCommandTest extends TestCase
             'name'   => 'Text 2',
             'locale' => 'vi'
         ]);
-
-        $this->cleanFiles();
     }
 }

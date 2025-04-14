@@ -28,10 +28,8 @@ jobs:
         with:
           sarif_file: results.sarif
 
-  check_style_and_test_coverage:
+  check_style:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,19 +51,6 @@ jobs:
 
       - name: Run check style
         run: composer run-script phpcs
-
-      - name: Run tests
-        env:
-          XDEBUG_MODE: coverage
-        run: ./vendor/bin/pest --coverage-clover clover.xml
-
-      - name: Generate test coverage badge
-        uses: timkrase/phpunit-coverage-badge@v1.2.0
-        with:
-          coverage_badge_path: 'badge-coverage.svg'
-          push_badge: true
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_message: 'bot: Update code coverage badge'
           
   test_multiple_version_laravel_and_php:
     runs-on: ${{ matrix.os }}
@@ -117,5 +102,5 @@ jobs:
           key: dependencies-${{ matrix.dependency-version }}-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Execute tests
-        run: ./vendor/bin/pest
+        run: ./vendor/bin/phpunit
   
