@@ -14,6 +14,7 @@ class BlockTranslation extends Model
     protected $fillable = [
         'name',
         'description',
+        'icon',
     ];
 
     public function __construct(array $attributes = [])

@@ -7,6 +7,7 @@ namespace Thinhnx\LaravelPageBuilder\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 class CreateBlockCommand extends Command
 {
@@ -14,12 +15,15 @@ class CreateBlockCommand extends Command
 
     protected $description = 'Create block for page builder.';
 
+    /**
+     * @throws Throwable
+     */
     public function handle(): void
     {
         $data = [];
 
         foreach (config('page-builder.locales') as $locale) {
-            $data['translations'][$locale]['name'] = $this->ask(
+            $data[$locale]['name'] = $this->ask(
                 'Enter a ' . __("page-builder.language.$locale") . ' name for the block?'
             );
         }
@@ -31,7 +35,7 @@ class CreateBlockCommand extends Command
             $data['type'] = $this->ask('Enter another name for the block type?');
         }
 
-        $data['is_layout'] = $this->confirm('Is this block can contain other blocks?', false);
+        $data['is_layout'] = $this->confirm('Is this block can contain other blocks?');
 
         $this->info('Creating the block...');
         DB::transaction(function () use ($data) {
