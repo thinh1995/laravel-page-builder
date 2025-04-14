@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744614554">
-  <project timestamp="1744614554">
+<coverage generated="1744614712">
+  <project timestamp="1744614712">
     <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Console/CreateBlockCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\CreateBlockCommand" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
