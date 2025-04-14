@@ -15,4 +15,9 @@ abstract class TestCase extends OrchestraTestCase
             LaravelPageBuilderProvider::class,
         ];
     }
+
+    public function getEnvironmentSetUp($app): void
+    {
+        include_once __DIR__ . '/../database/seeders/PageBuilderTablesSeeder.php.stub';
+    }
 }

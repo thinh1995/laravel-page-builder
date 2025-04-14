@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Kalnoy\Nestedset\NestedSet;
 
 return new class extends Migration {
     public function up(): void
@@ -14,7 +15,7 @@ return new class extends Migration {
             $table->text('content')->nullable();
             $table->integer('order')->default(0);
             $table->integer('column_index')->nullable();
-            $table->nestedSet();
+            NestedSet::columns($table);
             $table->string('locale')->default(config('page-builder.default_locale'));
             $table->timestamps();
 

@@ -9,9 +9,9 @@ return [
     ],
 
     'route' => [
-        'prefix'    => 'page-builder',
-        'as'        => 'page-builder.',
-        'middlware' => [],
+        'prefix'     => 'page-builder',
+        'as'         => 'page-builder.',
+        'middleware' => [],
     ],
 
     'tables' => [

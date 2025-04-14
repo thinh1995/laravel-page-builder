@@ -83,7 +83,7 @@ class InstallPageBuilderCommand extends Command
         match ($pathType) {
             'file' => $isExist = $this->fileExist($path),
             'files' => $isExist = $this->filesExist($path),
-            'directory' => $isExist = File::isDirectory($path)
+            'directory' => $isExist = File::isDirectory(base_path($path)),
         };
 
         if (! $isExist) {
@@ -98,7 +98,7 @@ class InstallPageBuilderCommand extends Command
 
             if ($tag === 'seeders') {
                 if ($this->confirm('Do you want to run the seeders?')) {
-                    $this->call('db:seed --class=PageBuilderTablesSeeder');
+                    $this->call('db:seed', ['--class' => 'PageBuilderTablesSeeder']);
                 }
             }
 
