@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744614081">
-  <project timestamp="1744614081">
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/CreateBlockCommand.php">
+<coverage generated="1744614554">
+  <project timestamp="1744614554">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Console/CreateBlockCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\CreateBlockCommand" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
       </class>
@@ -26,7 +26,7 @@
       <line num="46" type="stmt" count="0"/>
       <metrics loc="49" ncloc="49" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/InstallPageBuilderCommand.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Console/InstallPageBuilderCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\InstallPageBuilderCommand" namespace="global">
         <metrics complexity="20" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="95" elements="104" coveredelements="100"/>
       </class>
@@ -136,7 +136,7 @@
       <line num="169" type="stmt" count="5"/>
       <metrics loc="172" ncloc="172" classes="1" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="95" elements="104" coveredelements="100"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Facades/PageBuilder.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Facades/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\Facades\PageBuilder" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </class>
@@ -144,7 +144,7 @@
       <line num="17" type="stmt" count="0"/>
       <metrics loc="20" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/Controller.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/Controller.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\Controller" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
       </class>
@@ -153,7 +153,7 @@
       <line num="21" type="stmt" count="0"/>
       <metrics loc="24" ncloc="24" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/PageBuilderController.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/PageBuilderController.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\PageBuilderController" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="20" coveredelements="0"/>
       </class>
@@ -179,7 +179,7 @@
       <line num="42" type="stmt" count="0"/>
       <metrics loc="45" ncloc="45" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="20" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/ResponseApiTrait.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/ResponseApiTrait.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\ResponseApiTrait" namespace="global">
         <metrics complexity="23" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="56" coveredelements="0"/>
       </class>
@@ -241,7 +241,7 @@
       <line num="259" type="stmt" count="0"/>
       <metrics loc="262" ncloc="145" classes="1" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="56" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/LaravelPageBuilderProvider.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/LaravelPageBuilderProvider.php">
       <class name="Thinhnx\LaravelPageBuilder\LaravelPageBuilderProvider" namespace="global">
         <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="47" coveredelements="47"/>
       </class>
@@ -294,7 +294,7 @@
       <line num="85" type="stmt" count="8"/>
       <metrics loc="88" ncloc="82" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="47" coveredelements="47"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Block.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Block.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Block" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
       </class>
@@ -303,7 +303,7 @@
       <line num="27" type="stmt" count="0"/>
       <metrics loc="30" ncloc="30" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/BlockTranslation.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/BlockTranslation.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\BlockTranslation" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
       </class>
@@ -314,7 +314,7 @@
       <line num="27" type="stmt" count="0"/>
       <metrics loc="30" ncloc="30" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Blockable.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Blockable.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Blockable" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
       </class>
@@ -325,7 +325,7 @@
       <line num="42" type="stmt" count="0"/>
       <metrics loc="45" ncloc="45" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Traits/HasBlocks.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Traits/HasBlocks.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Traits\HasBlocks" namespace="global">
         <metrics complexity="19" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="86" coveredelements="0"/>
       </class>
@@ -417,7 +417,7 @@
       <line num="164" type="stmt" count="0"/>
       <metrics loc="166" ncloc="166" classes="1" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="86" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/PageBuilder.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\PageBuilder" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
       </class>
@@ -428,7 +428,7 @@
       <line num="24" type="stmt" count="0"/>
       <metrics loc="27" ncloc="27" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockTransformer.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockTransformer" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
       </class>
@@ -445,7 +445,7 @@
       <line num="29" type="stmt" count="0"/>
       <metrics loc="32" ncloc="32" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockTranslationTransformer.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockTranslationTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockTranslationTransformer" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="10" coveredelements="0"/>
       </class>
@@ -461,7 +461,7 @@
       <line num="22" type="stmt" count="0"/>
       <metrics loc="25" ncloc="25" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="10" coveredelements="0"/>
     </file>
-    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockableTransformer.php">
+    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockableTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockableTransformer" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
       </class>
