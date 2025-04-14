@@ -25,7 +25,7 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function initialize(): void
     {
-        File::put(config_path("translatable.php"), "<?php \n return ['locales' => ['vi', 'en']];");
+        $this->app['config']->set('translatable.locales', ['vi', 'en']);
 
         $command = $this->artisan('page-builder:install');
         $command->expectsConfirmation('Do you want to run migrations?', 'yes');
