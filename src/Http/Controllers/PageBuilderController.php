@@ -26,7 +26,7 @@ class PageBuilderController extends Controller
         return view("page-builder::blocks.$type", compact('content'));
     }
 
-    public function preview(Request $request): View
+    public function preview(Request $request): View|JsonResponse
     {
         $request->validate([
             'locale'   => ['required', 'in:' . implode(',', config('page-builder.locales'))],
@@ -38,6 +38,14 @@ class PageBuilderController extends Controller
         $locale  = $request->get('locale');
         $blocks  = $request->get('blocks', []);
         $context = $request->get('context', []);
+
+        if ($request->ajax()) {
+            return $this->respondWithArray([
+                'data' => base64_encode(
+                    view('page-builder::preview', compact('locale', 'blocks', 'context'))->render()
+                ),
+            ]);
+        }
 
         return view('page-builder::preview', compact('locale', 'blocks', 'context'));
     }

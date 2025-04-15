@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Thinhnx\LaravelPageBuilder\Tests\Unit\Commands;
+namespace Thinhnx\LaravelPageBuilder\Tests\Unit\Console;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;

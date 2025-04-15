@@ -1,8 +1,15 @@
+// Helper function
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(atob(str).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
 // Initialize Sortable for available block list
 function initBlockList() {
   const blockList = document.getElementById("block-list");
   Sortable.create(blockList, {
-    group: { name: "blocks", pull: "clone", put: false },
+    group: {name: "blocks", pull: "clone", put: false},
     sort: false,
   });
 }
@@ -68,7 +75,7 @@ async function createBlockEditor(type, content = "") {
       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
       "X-Requested-With": "XMLHttpRequest",
     },
-    body: JSON.stringify({ type: type, content: content }),
+    body: JSON.stringify({type: type, content: content}),
   })
     .then((response) => response.text())
     .then((text) => {
@@ -167,11 +174,11 @@ async function createBlockFromData(
     container.appendChild(div);
 
     div.querySelector(".remove-block").addEventListener("click", function () {
-        div.remove();
-        updateBlocksInput(locale);
+      div.remove();
+      updateBlocksInput(locale);
     });
     div.querySelector(".block-content")?.addEventListener("input", () =>
-        updateBlocksInput(locale)
+      updateBlocksInput(locale)
     );
 
     if (block.block.is_layout) {
@@ -206,7 +213,8 @@ async function createBlockFromData(
 }
 
 // Process preview
-function initPreview(callback = () => { }) {
+function initPreview(callback = () => {
+}) {
   let currentLocale = null;
   document.querySelectorAll(".preview-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -230,8 +238,8 @@ function initPreview(callback = () => { }) {
         }),
       })
         .then((response) => response.text())
-        .then((html) => {
-          iframe.srcdoc = html;
+        .then((text) => {
+          iframe.srcdoc = b64DecodeUnicode(JSON.parse(text).data);
           updateIframeSize("desktop");
         })
         .catch((error) => console.error("Error:", error));
@@ -288,7 +296,8 @@ function updateIframeSize(device) {
 // Initialize the entire editor
 async function initBlockEditor(
   initialBlocks = {},
-  getContextCallback = () => { }
+  getContextCallback = () => {
+  }
 ) {
   initBlockList();
   await initEditors();
