@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744628692">
-  <project timestamp="1744628692">
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Console/CreateBlockCommand.php">
+<coverage generated="1744703474">
+  <project timestamp="1744703474">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/CreateBlockCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\CreateBlockCommand" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="19" coveredelements="19"/>
       </class>
@@ -26,109 +26,109 @@
       <line num="50" type="stmt" count="2"/>
       <metrics loc="53" ncloc="50" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="19" coveredelements="19"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Console/InstallPageBuilderCommand.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/InstallPageBuilderCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\InstallPageBuilderCommand" namespace="global">
         <metrics complexity="20" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="95" elements="104" coveredelements="100"/>
       </class>
-      <line num="19" type="method" name="handle" visibility="public" complexity="2" crap="2" count="10"/>
-      <line num="21" type="stmt" count="10"/>
-      <line num="23" type="stmt" count="10"/>
-      <line num="24" type="stmt" count="10"/>
-      <line num="27" type="stmt" count="10"/>
-      <line num="30" type="method" name="getStepData" visibility="private" complexity="1" crap="1" count="10"/>
-      <line num="32" type="stmt" count="10"/>
-      <line num="33" type="stmt" count="10"/>
-      <line num="34" type="stmt" count="10"/>
-      <line num="35" type="stmt" count="10"/>
-      <line num="36" type="stmt" count="10"/>
-      <line num="37" type="stmt" count="10"/>
-      <line num="38" type="stmt" count="10"/>
-      <line num="39" type="stmt" count="10"/>
-      <line num="40" type="stmt" count="10"/>
-      <line num="41" type="stmt" count="10"/>
-      <line num="42" type="stmt" count="10"/>
-      <line num="43" type="stmt" count="10"/>
-      <line num="44" type="stmt" count="10"/>
-      <line num="45" type="stmt" count="10"/>
-      <line num="46" type="stmt" count="10"/>
-      <line num="47" type="stmt" count="10"/>
-      <line num="48" type="stmt" count="10"/>
-      <line num="49" type="stmt" count="10"/>
-      <line num="50" type="stmt" count="10"/>
-      <line num="51" type="stmt" count="10"/>
-      <line num="52" type="stmt" count="10"/>
-      <line num="53" type="stmt" count="10"/>
-      <line num="54" type="stmt" count="10"/>
-      <line num="55" type="stmt" count="10"/>
-      <line num="56" type="stmt" count="10"/>
-      <line num="57" type="stmt" count="10"/>
-      <line num="58" type="stmt" count="10"/>
-      <line num="59" type="stmt" count="10"/>
-      <line num="60" type="stmt" count="10"/>
-      <line num="61" type="stmt" count="10"/>
-      <line num="62" type="stmt" count="10"/>
-      <line num="63" type="stmt" count="10"/>
-      <line num="64" type="stmt" count="10"/>
-      <line num="65" type="stmt" count="10"/>
-      <line num="66" type="stmt" count="10"/>
-      <line num="67" type="stmt" count="10"/>
-      <line num="68" type="stmt" count="10"/>
-      <line num="69" type="stmt" count="10"/>
-      <line num="70" type="stmt" count="10"/>
-      <line num="71" type="stmt" count="10"/>
-      <line num="72" type="stmt" count="10"/>
-      <line num="73" type="stmt" count="10"/>
-      <line num="74" type="stmt" count="10"/>
-      <line num="75" type="stmt" count="10"/>
-      <line num="76" type="stmt" count="10"/>
-      <line num="79" type="method" name="runStep" visibility="private" complexity="8" crap="8" count="10"/>
-      <line num="81" type="stmt" count="10"/>
-      <line num="83" type="stmt" count="10"/>
-      <line num="84" type="stmt" count="10"/>
-      <line num="85" type="stmt" count="10"/>
-      <line num="86" type="stmt" count="10"/>
-      <line num="87" type="stmt" count="10"/>
-      <line num="89" type="stmt" count="10"/>
-      <line num="90" type="stmt" count="10"/>
-      <line num="91" type="stmt" count="10"/>
-      <line num="93" type="stmt" count="10"/>
-      <line num="94" type="stmt" count="9"/>
-      <line num="95" type="stmt" count="3"/>
-      <line num="99" type="stmt" count="10"/>
-      <line num="100" type="stmt" count="9"/>
-      <line num="101" type="stmt" count="3"/>
-      <line num="105" type="stmt" count="10"/>
+      <line num="19" type="method" name="handle" visibility="public" complexity="2" crap="2" count="13"/>
+      <line num="21" type="stmt" count="13"/>
+      <line num="23" type="stmt" count="13"/>
+      <line num="24" type="stmt" count="13"/>
+      <line num="27" type="stmt" count="13"/>
+      <line num="30" type="method" name="getStepData" visibility="private" complexity="1" crap="1" count="13"/>
+      <line num="32" type="stmt" count="13"/>
+      <line num="33" type="stmt" count="13"/>
+      <line num="34" type="stmt" count="13"/>
+      <line num="35" type="stmt" count="13"/>
+      <line num="36" type="stmt" count="13"/>
+      <line num="37" type="stmt" count="13"/>
+      <line num="38" type="stmt" count="13"/>
+      <line num="39" type="stmt" count="13"/>
+      <line num="40" type="stmt" count="13"/>
+      <line num="41" type="stmt" count="13"/>
+      <line num="42" type="stmt" count="13"/>
+      <line num="43" type="stmt" count="13"/>
+      <line num="44" type="stmt" count="13"/>
+      <line num="45" type="stmt" count="13"/>
+      <line num="46" type="stmt" count="13"/>
+      <line num="47" type="stmt" count="13"/>
+      <line num="48" type="stmt" count="13"/>
+      <line num="49" type="stmt" count="13"/>
+      <line num="50" type="stmt" count="13"/>
+      <line num="51" type="stmt" count="13"/>
+      <line num="52" type="stmt" count="13"/>
+      <line num="53" type="stmt" count="13"/>
+      <line num="54" type="stmt" count="13"/>
+      <line num="55" type="stmt" count="13"/>
+      <line num="56" type="stmt" count="13"/>
+      <line num="57" type="stmt" count="13"/>
+      <line num="58" type="stmt" count="13"/>
+      <line num="59" type="stmt" count="13"/>
+      <line num="60" type="stmt" count="13"/>
+      <line num="61" type="stmt" count="13"/>
+      <line num="62" type="stmt" count="13"/>
+      <line num="63" type="stmt" count="13"/>
+      <line num="64" type="stmt" count="13"/>
+      <line num="65" type="stmt" count="13"/>
+      <line num="66" type="stmt" count="13"/>
+      <line num="67" type="stmt" count="13"/>
+      <line num="68" type="stmt" count="13"/>
+      <line num="69" type="stmt" count="13"/>
+      <line num="70" type="stmt" count="13"/>
+      <line num="71" type="stmt" count="13"/>
+      <line num="72" type="stmt" count="13"/>
+      <line num="73" type="stmt" count="13"/>
+      <line num="74" type="stmt" count="13"/>
+      <line num="75" type="stmt" count="13"/>
+      <line num="76" type="stmt" count="13"/>
+      <line num="79" type="method" name="runStep" visibility="private" complexity="8" crap="8" count="13"/>
+      <line num="81" type="stmt" count="13"/>
+      <line num="83" type="stmt" count="13"/>
+      <line num="84" type="stmt" count="13"/>
+      <line num="85" type="stmt" count="13"/>
+      <line num="86" type="stmt" count="13"/>
+      <line num="87" type="stmt" count="13"/>
+      <line num="89" type="stmt" count="13"/>
+      <line num="90" type="stmt" count="13"/>
+      <line num="91" type="stmt" count="13"/>
+      <line num="93" type="stmt" count="13"/>
+      <line num="94" type="stmt" count="12"/>
+      <line num="95" type="stmt" count="6"/>
+      <line num="99" type="stmt" count="13"/>
+      <line num="100" type="stmt" count="12"/>
+      <line num="101" type="stmt" count="6"/>
+      <line num="105" type="stmt" count="13"/>
       <line num="108" type="stmt" count="6"/>
       <line num="109" type="stmt" count="5"/>
       <line num="110" type="stmt" count="5"/>
       <line num="111" type="stmt" count="0"/>
       <line num="113" type="stmt" count="5"/>
       <line num="116" type="stmt" count="1"/>
-      <line num="119" type="method" name="fileExist" visibility="private" complexity="2" crap="2" count="10"/>
-      <line num="121" type="stmt" count="10"/>
-      <line num="122" type="stmt" count="10"/>
-      <line num="124" type="stmt" count="10"/>
-      <line num="125" type="stmt" count="10"/>
-      <line num="126" type="stmt" count="10"/>
-      <line num="127" type="stmt" count="10"/>
+      <line num="119" type="method" name="fileExist" visibility="private" complexity="2" crap="2" count="13"/>
+      <line num="121" type="stmt" count="13"/>
+      <line num="122" type="stmt" count="13"/>
+      <line num="124" type="stmt" count="13"/>
+      <line num="125" type="stmt" count="13"/>
+      <line num="126" type="stmt" count="13"/>
+      <line num="127" type="stmt" count="13"/>
       <line num="128" type="stmt" count="1"/>
-      <line num="129" type="stmt" count="10"/>
-      <line num="131" type="stmt" count="10"/>
-      <line num="134" type="stmt" count="10"/>
-      <line num="137" type="method" name="filesExist" visibility="private" complexity="4" crap="4.07" count="10"/>
-      <line num="139" type="stmt" count="10"/>
-      <line num="140" type="stmt" count="10"/>
-      <line num="141" type="stmt" count="10"/>
+      <line num="129" type="stmt" count="13"/>
+      <line num="131" type="stmt" count="13"/>
+      <line num="134" type="stmt" count="13"/>
+      <line num="137" type="method" name="filesExist" visibility="private" complexity="4" crap="4.07" count="13"/>
+      <line num="139" type="stmt" count="13"/>
+      <line num="140" type="stmt" count="13"/>
+      <line num="141" type="stmt" count="13"/>
       <line num="142" type="stmt" count="2"/>
-      <line num="146" type="stmt" count="10"/>
+      <line num="146" type="stmt" count="13"/>
       <line num="149" type="stmt" count="0"/>
-      <line num="152" type="method" name="publish" visibility="private" complexity="1" crap="1" count="10"/>
-      <line num="154" type="stmt" count="10"/>
-      <line num="155" type="stmt" count="10"/>
-      <line num="156" type="stmt" count="10"/>
-      <line num="157" type="stmt" count="10"/>
-      <line num="158" type="stmt" count="10"/>
-      <line num="160" type="stmt" count="10"/>
+      <line num="152" type="method" name="publish" visibility="private" complexity="1" crap="1" count="13"/>
+      <line num="154" type="stmt" count="13"/>
+      <line num="155" type="stmt" count="13"/>
+      <line num="156" type="stmt" count="13"/>
+      <line num="157" type="stmt" count="13"/>
+      <line num="158" type="stmt" count="13"/>
+      <line num="160" type="stmt" count="13"/>
       <line num="163" type="method" name="shouldOverwrite" visibility="private" complexity="2" crap="2" count="5"/>
       <line num="165" type="stmt" count="5"/>
       <line num="166" type="stmt" count="1"/>
@@ -136,7 +136,7 @@
       <line num="169" type="stmt" count="5"/>
       <metrics loc="172" ncloc="172" classes="1" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="95" elements="104" coveredelements="100"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Facades/PageBuilder.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Facades/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\Facades\PageBuilder" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </class>
@@ -144,7 +144,7 @@
       <line num="17" type="stmt" count="0"/>
       <metrics loc="20" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/Controller.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/Controller.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\Controller" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
       </class>
@@ -153,7 +153,7 @@
       <line num="21" type="stmt" count="0"/>
       <metrics loc="24" ncloc="24" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/PageBuilderController.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/PageBuilderController.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\PageBuilderController" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="20" coveredelements="0"/>
       </class>
@@ -179,7 +179,7 @@
       <line num="42" type="stmt" count="0"/>
       <metrics loc="45" ncloc="45" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="20" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Http/Controllers/ResponseApiTrait.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Http/Controllers/ResponseApiTrait.php">
       <class name="Thinhnx\LaravelPageBuilder\Http\Controllers\ResponseApiTrait" namespace="global">
         <metrics complexity="23" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="56" coveredelements="0"/>
       </class>
@@ -241,91 +241,97 @@
       <line num="259" type="stmt" count="0"/>
       <metrics loc="262" ncloc="145" classes="1" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="56" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/LaravelPageBuilderProvider.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/LaravelPageBuilderProvider.php">
       <class name="Thinhnx\LaravelPageBuilder\LaravelPageBuilderProvider" namespace="global">
         <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="47" coveredelements="47"/>
       </class>
-      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1" count="10"/>
-      <line num="16" type="stmt" count="10"/>
-      <line num="18" type="stmt" count="10"/>
-      <line num="21" type="method" name="boot" visibility="public" complexity="2" crap="2" count="10"/>
-      <line num="23" type="stmt" count="10"/>
-      <line num="24" type="stmt" count="10"/>
-      <line num="26" type="stmt" count="10"/>
-      <line num="27" type="stmt" count="10"/>
-      <line num="28" type="stmt" count="10"/>
-      <line num="29" type="stmt" count="10"/>
-      <line num="30" type="stmt" count="10"/>
-      <line num="33" type="stmt" count="10"/>
-      <line num="34" type="stmt" count="10"/>
-      <line num="35" type="stmt" count="10"/>
-      <line num="36" type="stmt" count="10"/>
-      <line num="37" type="stmt" count="10"/>
-      <line num="38" type="stmt" count="10"/>
-      <line num="39" type="stmt" count="10"/>
-      <line num="40" type="stmt" count="10"/>
-      <line num="41" type="stmt" count="10"/>
-      <line num="42" type="stmt" count="10"/>
-      <line num="43" type="stmt" count="10"/>
-      <line num="46" type="stmt" count="10"/>
-      <line num="47" type="stmt" count="10"/>
-      <line num="48" type="stmt" count="10"/>
-      <line num="49" type="stmt" count="10"/>
-      <line num="50" type="stmt" count="10"/>
-      <line num="53" type="stmt" count="10"/>
-      <line num="54" type="stmt" count="10"/>
-      <line num="55" type="stmt" count="10"/>
-      <line num="58" type="stmt" count="10"/>
-      <line num="59" type="stmt" count="10"/>
-      <line num="60" type="stmt" count="10"/>
-      <line num="63" type="stmt" count="10"/>
-      <line num="64" type="stmt" count="10"/>
-      <line num="65" type="stmt" count="10"/>
-      <line num="68" type="stmt" count="10"/>
-      <line num="72" type="method" name="registerRoutes" visibility="protected" complexity="1" crap="1" count="10"/>
-      <line num="74" type="stmt" count="10"/>
-      <line num="75" type="stmt" count="10"/>
-      <line num="76" type="stmt" count="10"/>
-      <line num="79" type="method" name="routeConfiguration" visibility="protected" complexity="1" crap="1" count="10"/>
-      <line num="81" type="stmt" count="10"/>
-      <line num="82" type="stmt" count="10"/>
-      <line num="83" type="stmt" count="10"/>
-      <line num="84" type="stmt" count="10"/>
-      <line num="85" type="stmt" count="10"/>
+      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="16" type="stmt" count="13"/>
+      <line num="18" type="stmt" count="13"/>
+      <line num="21" type="method" name="boot" visibility="public" complexity="2" crap="2" count="13"/>
+      <line num="23" type="stmt" count="13"/>
+      <line num="24" type="stmt" count="13"/>
+      <line num="26" type="stmt" count="13"/>
+      <line num="27" type="stmt" count="13"/>
+      <line num="28" type="stmt" count="13"/>
+      <line num="29" type="stmt" count="13"/>
+      <line num="30" type="stmt" count="13"/>
+      <line num="33" type="stmt" count="13"/>
+      <line num="34" type="stmt" count="13"/>
+      <line num="35" type="stmt" count="13"/>
+      <line num="36" type="stmt" count="13"/>
+      <line num="37" type="stmt" count="13"/>
+      <line num="38" type="stmt" count="13"/>
+      <line num="39" type="stmt" count="13"/>
+      <line num="40" type="stmt" count="13"/>
+      <line num="41" type="stmt" count="13"/>
+      <line num="42" type="stmt" count="13"/>
+      <line num="43" type="stmt" count="13"/>
+      <line num="46" type="stmt" count="13"/>
+      <line num="47" type="stmt" count="13"/>
+      <line num="48" type="stmt" count="13"/>
+      <line num="49" type="stmt" count="13"/>
+      <line num="50" type="stmt" count="13"/>
+      <line num="53" type="stmt" count="13"/>
+      <line num="54" type="stmt" count="13"/>
+      <line num="55" type="stmt" count="13"/>
+      <line num="58" type="stmt" count="13"/>
+      <line num="59" type="stmt" count="13"/>
+      <line num="60" type="stmt" count="13"/>
+      <line num="63" type="stmt" count="13"/>
+      <line num="64" type="stmt" count="13"/>
+      <line num="65" type="stmt" count="13"/>
+      <line num="68" type="stmt" count="13"/>
+      <line num="72" type="method" name="registerRoutes" visibility="protected" complexity="1" crap="1" count="13"/>
+      <line num="74" type="stmt" count="13"/>
+      <line num="75" type="stmt" count="13"/>
+      <line num="76" type="stmt" count="13"/>
+      <line num="79" type="method" name="routeConfiguration" visibility="protected" complexity="1" crap="1" count="13"/>
+      <line num="81" type="stmt" count="13"/>
+      <line num="82" type="stmt" count="13"/>
+      <line num="83" type="stmt" count="13"/>
+      <line num="84" type="stmt" count="13"/>
+      <line num="85" type="stmt" count="13"/>
       <metrics loc="88" ncloc="82" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="47" coveredelements="47"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Block.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Block.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Block" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </class>
-      <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="26" type="stmt" count="2"/>
-      <line num="27" type="stmt" count="2"/>
-      <metrics loc="30" ncloc="30" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="29" type="stmt" count="5"/>
+      <line num="30" type="stmt" count="5"/>
+      <line num="33" type="method" name="newFactory" visibility="protected" complexity="1" crap="1" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <metrics loc="38" ncloc="38" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/BlockTranslation.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/BlockTranslation.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\BlockTranslation" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
       </class>
-      <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="22" type="stmt" count="2"/>
-      <line num="23" type="stmt" count="2"/>
-      <line num="26" type="method" name="block" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <metrics loc="31" ncloc="31" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
+      <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="27" type="stmt" count="4"/>
+      <line num="28" type="stmt" count="4"/>
+      <line num="31" type="method" name="newFactory" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="36" type="method" name="block" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <metrics loc="41" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Blockable.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Blockable.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Blockable" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
       </class>
-      <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="40" type="method" name="block" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <metrics loc="45" ncloc="45" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      <line num="37" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="43" type="method" name="newFactory" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="48" type="method" name="block" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <metrics loc="53" ncloc="53" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Models/Traits/HasBlocks.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Traits/HasBlocks.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Traits\HasBlocks" namespace="global">
         <metrics complexity="19" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="86" coveredelements="0"/>
       </class>
@@ -417,7 +423,7 @@
       <line num="164" type="stmt" count="0"/>
       <metrics loc="166" ncloc="166" classes="1" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="86" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/PageBuilder.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\PageBuilder" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
       </class>
@@ -428,7 +434,7 @@
       <line num="24" type="stmt" count="0"/>
       <metrics loc="27" ncloc="27" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockTransformer.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockTransformer" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
       </class>
@@ -445,7 +451,7 @@
       <line num="29" type="stmt" count="0"/>
       <metrics loc="32" ncloc="32" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockTranslationTransformer.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockTranslationTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockTranslationTransformer" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="10" coveredelements="0"/>
       </class>
@@ -461,7 +467,7 @@
       <line num="22" type="stmt" count="0"/>
       <metrics loc="25" ncloc="25" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="10" coveredelements="0"/>
     </file>
-    <file name="/home/runner/work/laravel-page-builder/laravel-page-builder/src/Transformers/BlockableTransformer.php">
+    <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Transformers/BlockableTransformer.php">
       <class name="Thinhnx\LaravelPageBuilder\Transformers\BlockableTransformer" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
       </class>
@@ -483,6 +489,6 @@
       <line num="36" type="stmt" count="0"/>
       <metrics loc="39" ncloc="39" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
-    <metrics files="15" loc="1059" ncloc="930" classes="15" methods="58" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="334" coveredstatements="159" elements="392" coveredelements="172"/>
+    <metrics files="15" loc="1085" ncloc="956" classes="15" methods="61" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="337" coveredstatements="166" elements="398" coveredelements="185"/>
   </project>
 </coverage>

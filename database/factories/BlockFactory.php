@@ -13,6 +13,9 @@ class BlockFactory extends Factory
 
     public function definition(): array
     {
-        return [];
+        return [
+            'type'      => $this->faker->word,
+            'is_layout' => $this->faker->boolean,
+        ];
     }
 }

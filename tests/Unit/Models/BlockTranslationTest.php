@@ -23,20 +23,19 @@ class BlockTranslationTest extends TestCase
 
     public function test_create_new_block_translation_models()
     {
-        $block = Block::factory()->create([
-            'type' => 'new_block',
-            'vi'   => [
-                'name' => 'Block mới',
-            ],
-            'en'   => [
-                'name' => 'New block',
-            ],
-        ]);
+        $blockTranslationVi = BlockTranslation::factory()->create(['locale' => 'vi', 'name' => 'Block mới']);
+        $blockTranslationEn = BlockTranslation::factory()->create(
+            ['locale' => 'en', 'name' => 'New block', 'block_id' => $blockTranslationVi->block_id]
+        );
 
-        $this->assertEquals('new_block', $block->type);
-        $this->assertInstanceOf(BlockTranslation::class, $block->getTranslation('vi'));
-        $this->assertInstanceOf(BlockTranslation::class, $block->getTranslation('en'));
-        $this->assertEquals('Block mới', $block->getTranslation('vi')->name);
-        $this->assertEquals('New block', $block->getTranslation('en')->name);
+        $this->assertInstanceOf(BlockTranslation::class, $blockTranslationVi);
+        $this->assertEquals('vi', $blockTranslationVi->locale);
+        $this->assertEquals('Block mới', $blockTranslationVi->name);
+        $this->assertInstanceOf(Block::class, $blockTranslationVi->block);
+
+        $this->assertInstanceOf(BlockTranslation::class, $blockTranslationEn);
+        $this->assertEquals('en', $blockTranslationEn->locale);
+        $this->assertEquals('New block', $blockTranslationEn->name);
+        $this->assertInstanceOf(Block::class, $blockTranslationEn->block);
     }
 }

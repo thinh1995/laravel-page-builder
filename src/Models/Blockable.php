@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Thinhnx\LaravelPageBuilder\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Kalnoy\Nestedset\NodeTrait;
+use Thinhnx\LaravelPageBuilder\Database\Factories\BlockableFactory;
 
 class Blockable extends Model
 {
+    use HasFactory;
     use NodeTrait;
 
     protected $fillable = [
@@ -35,6 +38,11 @@ class Blockable extends Model
     {
         parent::__construct($attributes);
         $this->setTable(config('page-builder.tables.blockable'));
+    }
+
+    public static function newFactory(): BlockableFactory
+    {
+        return BlockableFactory::new();
     }
 
     public function block(): BelongsTo

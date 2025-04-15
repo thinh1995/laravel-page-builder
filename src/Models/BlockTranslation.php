@@ -19,6 +19,7 @@ class BlockTranslation extends Model
         'name',
         'description',
         'icon',
+        'locale',
     ];
 
     public function __construct(array $attributes = [])

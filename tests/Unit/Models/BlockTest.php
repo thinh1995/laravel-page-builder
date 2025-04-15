@@ -26,6 +26,7 @@ class BlockTest extends TestCase
             'type' => 'new_block'
         ]);
 
+        $this->assertInstanceOf(Block::class, $block);
         $this->assertEquals('new_block', $block->type);
     }
 }
