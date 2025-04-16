@@ -7,6 +7,7 @@ namespace Thinhnx\LaravelPageBuilder\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kalnoy\Nestedset\NodeTrait;
 use Thinhnx\LaravelPageBuilder\Database\Factories\BlockableFactory;
 
@@ -48,5 +49,10 @@ class Blockable extends Model
     public function block(): BelongsTo
     {
         return $this->belongsTo(Block::class);
+    }
+
+    public function blockable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

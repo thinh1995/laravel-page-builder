@@ -24,34 +24,34 @@ trait HasBlocks
                 }
             }
 
-            $model->blockables()->delete();
+            $model->blocks()->detach();
         });
     }
 
-    public function blockables(): MorphMany
+    public function blockItems(): MorphMany
     {
         return $this->morphMany(Blockable::class, 'blockable');
     }
 
-    public function syncBlocks(array $blocksData, string $locale = 'vi'): void
+    public function syncBlockItems(array $data, string $locale = 'vi'): void
     {
         $this->whereBlocksByLocale($locale)->detach();
-        $this->transformBlockables($blocksData);
+        $this->transformBlockItems($data);
 
-        foreach ($blocksData as $index => $blockData) {
+        foreach ($data as $index => $item) {
             Blockable::create([
-                'block_id'       => $blockData['block_id'],
+                'block_id'       => $item['block_id'],
                 'blockable_id'   => $this->id,
                 'blockable_type' => self::class,
-                'content'        => $blockData['content'] ?? null,
+                'content'        => $item['content'] ?? null,
                 'order'          => $index,
-                'column_index'   => $blockData['column_index'] ?? 0,
+                'column_index'   => $item['column_index'] ?? 0,
                 'locale'         => $locale,
-                'children'       => $blockData['children'] ?? [],
+                'children'       => $item['children'] ?? [],
             ]);
         }
 
-        $this->afterBlocksSynced($blocksData, $locale);
+        $this->afterBlockItemsSynced($data, $locale);
     }
 
     protected function whereBlocksByLocale(string $locale = 'vi'): BelongsToMany
@@ -75,28 +75,35 @@ trait HasBlocks
                     ->withTimestamps();
     }
 
-    protected function transformBlockables(&$blocksData): void
+    protected function transformBlockItems(&$data): void
     {
-        foreach ($blocksData as $index => $blockData) {
-            $this->setFormatBlockData($blockData);
-            $blocksData[$index]['blockable_id']   = $this->id;
-            $blocksData[$index]['blockable_type'] = self::class;
+        $blocks = app(config('page-builder.models.block'))::all();
 
-            if (isset($blockData['children'])) {
-                $this->transformBlockables($blocksData[$index]['children']);
+        foreach ($data as $index => $item) {
+            $this->setFormatItem($data[$index], $blocks->firstWhere('id', $item['block_id']));
+            $data[$index]['blockable_id']   = $this->id;
+            $data[$index]['blockable_type'] = self::class;
+
+            if (isset($item['children'])) {
+                $this->transformBlockItems($data[$index]['children']);
             }
         }
     }
 
-    public function setFormatBlockData(&$data): void
+    public function setFormatItem(&$data, Model $block): void
     {
     }
 
-    protected function afterBlocksSynced(array $blocksData, $locale): void
+    public function getFormatItem($data, Model $block)
+    {
+        return $data;
+    }
+
+    protected function afterBlockItemsSynced(array $data, $locale): void
     {
     }
 
-    public function addBlock(
+    public function addBlockItem(
         int $blockId,
         string $content,
         int $order = null,
@@ -104,24 +111,31 @@ trait HasBlocks
         int $columnIndex = 0,
         string $locale = 'vi'
     ): void {
-        $order ??= $this->whereBlocksByLocale($locale)->max('order') + 1;
-        $this->transformBlockables($children);
+        $order ??= $this->whereBlocksByLocale($locale)
+                        ->wherePivot('column_index', $columnIndex)
+                        ->max('order') + 1;
 
-        Blockable::create([
-            'block_id'       => $blockId,
-            'blockable_id'   => $this->id,
-            'blockable_type' => self::class,
-            'content'        => $content,
-            'order'          => $order,
-            'column_index'   => $columnIndex,
-            'locale'         => $locale,
-            'children'       => $children,
-        ]);
+        $data = [
+            [
+                'block_id'       => $blockId,
+                'blockable_id'   => $this->id,
+                'blockable_type' => self::class,
+                'content'        => $content,
+                'order'          => $order,
+                'column_index'   => $columnIndex,
+                'locale'         => $locale,
+                'children'       => $children,
+            ]
+        ];
 
-        $this->afterBlockAdded($blockId, $content, $order, $children, $columnIndex, $locale);
+        $this->transformBlockItems($data);
+
+        Blockable::create($data[0]);
+
+        $this->afterBlockItemAdded($blockId, $content, $order, $children, $columnIndex, $locale);
     }
 
-    protected function afterBlockAdded(
+    protected function afterBlockItemAdded(
         int $blockId,
         string $content,
         int $order,
@@ -131,18 +145,22 @@ trait HasBlocks
     ): void {
     }
 
-    public function removeBlock(int $blockableId, string $locale): void
+    public function removeBlockItem(int $blockItemId, string $locale): void
     {
-        $this->whereBlocksByLocale($locale)->detach($blockableId);
+        $this->whereBlocksByLocale($locale)
+             ->wherePivot('id', $blockItemId)
+             ->detach();
 
-        $this->afterBlockRemoved($blockableId, $locale);
+        $this->refresh();
+
+        $this->afterBlockItemRemoved($blockItemId, $locale);
     }
 
-    protected function afterBlockRemoved(int $blockableId, string $locale): void
+    protected function afterBlockItemRemoved(int $blockableId, string $locale): void
     {
     }
 
-    public function getBlocksByLocale(string $locale = 'vi'): Collection
+    public function getBlockItemsByLocale(string $locale = 'vi'): Collection
     {
         return Blockable::with(relations: 'block')
                         ->where('locale', $locale)
@@ -152,14 +170,8 @@ trait HasBlocks
                         ->orderBy('order')
                         ->get()
                         ->transform(function ($item) {
-                            $this->getFormatBlockData($item);
-
-                            return $item;
+                            return $this->getFormatItem($item, $item->block);
                         })
                         ->toTree();
-    }
-
-    public function getFormatBlockData(&$data): void
-    {
     }
 }

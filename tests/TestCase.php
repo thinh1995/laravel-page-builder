@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Thinhnx\LaravelPageBuilder\LaravelPageBuilderProvider;
+use Thinhnx\LaravelPageBuilder\Tests\includes\CreatePagebuilderPagesTable;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -20,6 +21,12 @@ abstract class TestCase extends OrchestraTestCase
 
     public function getEnvironmentSetUp($app): void
     {
+        include_once __DIR__ . '/includes/00_create_pagebuilder_pages_table.php';
+
+        (new CreatePagebuilderPagesTable())->up();
+
+        include_once __DIR__ . '/includes/Page.php';
+        include_once __DIR__ . '/includes/PageFactory.php';
         include_once __DIR__ . '/../database/seeders/PageBuilderTablesSeeder.php.stub';
     }
 

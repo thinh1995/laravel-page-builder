@@ -52,6 +52,6 @@
         "test": "phpunit",
         "phpcs": "phpcs",
         "phpcbf": "phpcbf",
-        "badge-coverage": "php-coverage-badger ./clover.xml ./badge-coverage.svg"
+        "badge-coverage": "XDEBUG_MODE=coverage phpunit && php-coverage-badger ./clover.xml ./badge-coverage.svg"
     }
 }

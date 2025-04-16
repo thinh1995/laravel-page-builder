@@ -17,7 +17,7 @@ class BlockableFactory extends Factory
         return [
             'block_id'       => Block::factory(),
             'blockable_id'   => $this->faker->numberBetween(1, 10),
-            'blockable_type' => 'App\Models\Page',
+            'blockable_type' => $this->faker->word,
             'parent_id'      => null,
             'content'        => $this->faker->text,
             'order'          => $this->faker->numberBetween(1, 100),

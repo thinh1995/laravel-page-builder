@@ -19,12 +19,12 @@ class PageBuilderControllerTest extends TestCase
 
     public function test_render_block_return_view()
     {
-        $response = $this->call('POST', route('page-builder.render-block'), [
+        $response = $this->post(route('page-builder.render-block'), [
             'type'    => 'text',
             'content' => 'test',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         View::shouldReceive('page-builder::blocks.text')->with(['content' => 'test']);
     }
 
@@ -35,7 +35,7 @@ class PageBuilderControllerTest extends TestCase
             'content' => 'test',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertJson(json_encode([
             'data' => base64_encode(view('page-builder::blocks.text', ['content' => 'test'])->render())
         ]));
@@ -52,21 +52,21 @@ class PageBuilderControllerTest extends TestCase
 
     public function test_preview_return_view()
     {
-        $response = $this->call('POST', route('page-builder.preview'), [
+        $response = $this->post(route('page-builder.preview'), [
             'locale' => 'vi'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         View::shouldReceive('page-builder::preview')->with(['locale' => 'vi']);
     }
 
     public function test_preview_return_json()
     {
-        $response = $this->call('POST', route('page-builder.preview'), [
+        $response = $this->post(route('page-builder.preview'), [
             'locale' => 'vi'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertJson(json_encode([
             'data' => base64_encode(view('page-builder::preview', ['locale' => 'vi', 'blocks' => []])->render())
         ]));
