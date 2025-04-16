@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'default_locale' => 'vi',
-    // default locale for column locale of table blockabes
+    'default_locale' => 'en',
+    // default locale when you have one locale
 
     // All supported locales
     'locales'        => [
-        'vi',
         'en',
+        'vi',
     ],
 
     // Route config

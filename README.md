@@ -29,7 +29,7 @@ The configuration file is located at `config/page-builder.php`.
 
 return [
     'default_locale' => 'vi',
-    // default locale for column locale of table blockabes
+    // default locale when you have one locale
 
     // All supported locales
     'locales'        => [
@@ -106,7 +106,7 @@ Below is an example of the create page screen:
 @extends('layouts.app')
 
 @section('content')
-    <form action="/pages/create" method="post">
+    <form id="createForm" action="/pages/create" method="post">
         @csrf
         <div class="mb-3">
             <label class="form-label" for="name">Name<label>
@@ -116,6 +116,9 @@ Below is an example of the create page screen:
             {{ PageBuilder::render() }}
         </div>
     </form>
+    <scritp>
+        window.formId = 'createForm';
+    </script>
 @endsection
 ```
 Below is an example of the edit page screen:
@@ -123,7 +126,7 @@ Below is an example of the edit page screen:
 @extends('layouts.app')
 
 @section('content')
-    <form action="/pages/{{ $page->id }}" method="post">
+    <form id="editForm" action="/pages/{{ $page->id }}" method="post">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -134,6 +137,9 @@ Below is an example of the edit page screen:
             {{ PageBuilder::render($page) }}
         </div>
     </form>
+    <scritp>
+        window.formId = 'editForm';
+    </script>
 @endsection
 ```
 
@@ -143,8 +149,14 @@ You use the `syncBlockItems()` function to synchronize new block items and exist
 ```php
 <?php
 $data = json_decode($request->get('blocks'), true);
-$locale = 'vi';
-$page->syncBlockItems($data[$locale], $locale);
+
+// For default locale
+$page->syncBlockItems($data[config('page-builder.default_locale')]);
+
+// For multiple locales
+foreach (config('page-builder.locales') as $locale) {
+    $page->syncBlockItems($data[$locale], $locale);
+}
 ```
 ### 2. Create new block
 Currently, I have created 3 blocks:

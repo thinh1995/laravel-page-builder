@@ -33,8 +33,9 @@ trait HasBlocks
         return $this->morphMany(Blockable::class, 'blockable');
     }
 
-    public function syncBlockItems(array $data, string $locale = 'vi'): void
+    public function syncBlockItems(array $data, ?string $locale): void
     {
+        $locale ??= config('page-builder.default_locale');
         $this->whereBlocksByLocale($locale)->detach();
         $this->transformBlockItems($data);
 
@@ -54,8 +55,10 @@ trait HasBlocks
         $this->afterBlockItemsSynced($data, $locale);
     }
 
-    protected function whereBlocksByLocale(string $locale = 'vi'): BelongsToMany
+    protected function whereBlocksByLocale(?string $locale): BelongsToMany
     {
+        $locale ??= config('page-builder.default_locale');
+
         return $this->blocks()->wherePivot('locale', $locale);
     }
 
@@ -109,11 +112,12 @@ trait HasBlocks
         int $order = null,
         array $children = [],
         int $columnIndex = 0,
-        string $locale = 'vi'
+        ?string $locale = null
     ): void {
-        $order ??= $this->whereBlocksByLocale($locale)
-                        ->wherePivot('column_index', $columnIndex)
-                        ->max('order') + 1;
+        $locale ??= config('page-builder.default_locale');
+        $order  ??= $this->whereBlocksByLocale($locale)
+                         ->wherePivot('column_index', $columnIndex)
+                         ->max('order') + 1;
 
         $data = [
             [
@@ -160,8 +164,10 @@ trait HasBlocks
     {
     }
 
-    public function getBlockItemsByLocale(string $locale = 'vi'): Collection
+    public function getBlockItemsByLocale(?string $locale = null): Collection
     {
+        $locale ??= config('page-builder.default_locale');
+
         return Blockable::with(relations: 'block')
                         ->where('locale', $locale)
                         ->where('blockable_type', self::class)

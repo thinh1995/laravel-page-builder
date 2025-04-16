@@ -45,7 +45,7 @@ class BlockTest extends TestCase
                 'column_index' => 0,
                 'children'     => []
             ],
-        ], 'en');
+        ], 'vi');
 
         $this->assertEquals(2, $page->blocks->count());
         $this->assertEquals(2, $page->blockItems->count());
@@ -69,7 +69,7 @@ class BlockTest extends TestCase
                 'column_index' => 0,
                 'children'     => []
             ],
-        ], 'en');
+        ], 'vi');
 
         $this->assertEquals(2, $page->blocks->count());
         $this->assertEquals(2, $page->blockItems()->count());

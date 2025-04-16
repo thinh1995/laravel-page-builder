@@ -72,7 +72,7 @@ async function createBlockEditor(type, content = "") {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
       "X-Requested-With": "XMLHttpRequest",
     },
     body: JSON.stringify({type: type, content: content}),
@@ -226,9 +226,7 @@ function initPreview(callback = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-TOKEN": document.querySelector(
-            'meta[name="csrf-token"]'
-          ).content,
+          "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
           "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify({
