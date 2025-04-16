@@ -9,7 +9,7 @@
     @case('layout-2')
       <div class="row">
         @foreach ([0, 1] as $colIndex)
-          <div class="col-md-6">
+          <div class="col-6">
             @foreach (collect($block['children'])->where('column_index', $colIndex)->all() as $item)
               @includeWhen($item, 'page-builder::partials.block', ['block' => $item])
             @endforeach
@@ -21,13 +21,13 @@
     @case('layout-3')
       <div class="row">
         @foreach ([0, 1, 2] as $colIndex)
-          <div class="col-md-4">
+          <div class="col-4">
             @foreach (collect($block['children'])->where('column_index', $colIndex)->all() as $item)
               @includeWhen($item, 'page-builder::partials.block', ['block' => $item])
             @endforeach
           </div>
+        @endforeach
       </div>
-      @endforeach
       @break
   @endswitch
 @endif

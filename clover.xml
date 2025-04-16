@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744799068">
-  <project timestamp="1744799068">
+<coverage generated="1744801673">
+  <project timestamp="1744801673">
     <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/CreateBlockCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\CreateBlockCommand" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="19" coveredelements="19"/>
@@ -341,7 +341,7 @@
     </file>
     <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Models/Traits/HasBlocks.php">
       <class name="Thinhnx\LaravelPageBuilder\Models\Traits\HasBlocks" namespace="global">
-        <metrics complexity="19" methods="14" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="80" elements="98" coveredelements="91"/>
+        <metrics complexity="19" methods="14" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="85" coveredstatements="81" elements="99" coveredelements="92"/>
       </class>
       <line num="18" type="method" name="bootHasBlocks" visibility="public" complexity="3" crap="3.33" count="3"/>
       <line num="20" type="stmt" count="3"/>
@@ -390,20 +390,20 @@
       <line num="86" type="stmt" count="2"/>
       <line num="87" type="stmt" count="2"/>
       <line num="88" type="stmt" count="2"/>
-      <line num="90" type="stmt" count="2"/>
+      <line num="89" type="stmt" count="2"/>
       <line num="91" type="stmt" count="2"/>
-      <line num="96" type="method" name="setFormatItem" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="98" type="stmt" count="0"/>
-      <line num="100" type="method" name="getFormatItem" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="102" type="stmt" count="0"/>
-      <line num="105" type="method" name="afterBlockItemsSynced" visibility="protected" complexity="1" crap="1" count="2"/>
-      <line num="107" type="stmt" count="2"/>
-      <line num="109" type="method" name="addBlockItem" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="117" type="stmt" count="2"/>
+      <line num="92" type="stmt" count="2"/>
+      <line num="97" type="method" name="setFormatItem" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="99" type="stmt" count="0"/>
+      <line num="101" type="method" name="getFormatItem" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="103" type="stmt" count="0"/>
+      <line num="106" type="method" name="afterBlockItemsSynced" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="108" type="stmt" count="2"/>
+      <line num="110" type="method" name="addBlockItem" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="118" type="stmt" count="2"/>
       <line num="119" type="stmt" count="2"/>
       <line num="120" type="stmt" count="2"/>
-      <line num="122" type="stmt" count="2"/>
+      <line num="121" type="stmt" count="2"/>
       <line num="123" type="stmt" count="2"/>
       <line num="124" type="stmt" count="2"/>
       <line num="125" type="stmt" count="2"/>
@@ -415,22 +415,22 @@
       <line num="131" type="stmt" count="2"/>
       <line num="132" type="stmt" count="2"/>
       <line num="133" type="stmt" count="2"/>
-      <line num="135" type="stmt" count="2"/>
-      <line num="137" type="stmt" count="2"/>
-      <line num="139" type="stmt" count="2"/>
-      <line num="142" type="method" name="afterBlockItemAdded" visibility="protected" complexity="1" crap="1" count="2"/>
-      <line num="150" type="stmt" count="2"/>
-      <line num="152" type="method" name="removeBlockItem" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="154" type="stmt" count="1"/>
+      <line num="134" type="stmt" count="2"/>
+      <line num="136" type="stmt" count="2"/>
+      <line num="138" type="stmt" count="2"/>
+      <line num="140" type="stmt" count="2"/>
+      <line num="143" type="method" name="afterBlockItemAdded" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="151" type="stmt" count="2"/>
+      <line num="153" type="method" name="removeBlockItem" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="155" type="stmt" count="1"/>
       <line num="156" type="stmt" count="1"/>
-      <line num="158" type="stmt" count="1"/>
-      <line num="160" type="stmt" count="1"/>
-      <line num="163" type="method" name="afterBlockItemRemoved" visibility="protected" complexity="1" crap="1" count="1"/>
-      <line num="165" type="stmt" count="1"/>
-      <line num="167" type="method" name="getBlockItemsByLocale" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="169" type="stmt" count="2"/>
-      <line num="171" type="stmt" count="2"/>
+      <line num="157" type="stmt" count="1"/>
+      <line num="159" type="stmt" count="1"/>
+      <line num="161" type="stmt" count="1"/>
+      <line num="164" type="method" name="afterBlockItemRemoved" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="166" type="stmt" count="1"/>
+      <line num="168" type="method" name="getBlockItemsByLocale" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="170" type="stmt" count="2"/>
       <line num="172" type="stmt" count="2"/>
       <line num="173" type="stmt" count="2"/>
       <line num="174" type="stmt" count="2"/>
@@ -441,7 +441,8 @@
       <line num="179" type="stmt" count="2"/>
       <line num="180" type="stmt" count="2"/>
       <line num="181" type="stmt" count="2"/>
-      <metrics loc="184" ncloc="184" classes="1" methods="14" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="80" elements="98" coveredelements="91"/>
+      <line num="182" type="stmt" count="2"/>
+      <metrics loc="185" ncloc="185" classes="1" methods="14" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="85" coveredstatements="81" elements="99" coveredelements="92"/>
     </file>
     <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\PageBuilder" namespace="global">
@@ -509,6 +510,6 @@
       <line num="36" type="stmt" count="1"/>
       <metrics loc="39" ncloc="39" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
     </file>
-    <metrics files="15" loc="1117" ncloc="988" classes="15" methods="62" coveredmethods="40" conditionals="0" coveredconditionals="0" statements="356" coveredstatements="310" elements="418" coveredelements="350"/>
+    <metrics files="15" loc="1118" ncloc="989" classes="15" methods="62" coveredmethods="40" conditionals="0" coveredconditionals="0" statements="357" coveredstatements="311" elements="419" coveredelements="351"/>
   </project>
 </coverage>

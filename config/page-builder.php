@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'default_locale' => 'en',
     // default locale when you have one locale
+    'default_locale' => 'en',
 
     // All supported locales
     'locales'        => [

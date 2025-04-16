@@ -37,7 +37,7 @@ trait HasBlocks
     {
         $locale ??= config('page-builder.default_locale');
         $this->whereBlocksByLocale($locale)->detach();
-        $this->transformBlockItems($data);
+        $this->transformBlockItems($data, $locale);
 
         foreach ($data as $index => $item) {
             Blockable::create([
@@ -78,7 +78,7 @@ trait HasBlocks
                     ->withTimestamps();
     }
 
-    protected function transformBlockItems(array &$data): void
+    protected function transformBlockItems(array &$data, string $locale): void
     {
         $blocks = app(config('page-builder.models.block'))::all();
 
@@ -86,9 +86,10 @@ trait HasBlocks
             $this->setFormatItem($data[$index], $blocks->firstWhere('id', $item['block_id']));
             $data[$index]['blockable_id']   = $this->id;
             $data[$index]['blockable_type'] = self::class;
+            $data[$index]['locale'] = $locale;
 
             if (isset($item['children'])) {
-                $this->transformBlockItems($data[$index]['children']);
+                $this->transformBlockItems($data[$index]['children'], $locale);
             }
         }
     }
@@ -132,7 +133,7 @@ trait HasBlocks
             ]
         ];
 
-        $this->transformBlockItems($data);
+        $this->transformBlockItems($data, $locale);
 
         Blockable::create($data[0]);
 

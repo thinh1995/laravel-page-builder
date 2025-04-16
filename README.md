@@ -28,13 +28,13 @@ The configuration file is located at `config/page-builder.php`.
 <?php
 
 return [
-    'default_locale' => 'vi',
     // default locale when you have one locale
+    'default_locale' => 'en',
 
     // All supported locales
     'locales'        => [
-        'vi',
         'en',
+        'vi',
     ],
 
     // Route config
