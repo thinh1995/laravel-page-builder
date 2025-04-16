@@ -6,7 +6,7 @@
 
 A simple Laravel package for creating blocks using drag and drop.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Ts-lTfCwK5k?si=iHcfbTj7dzogwv4v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<video src="https://youtu.be/Ts-lTfCwK5k?si=mB0HCpmK144J7u_k" width="320" height="240" controls></video>
 
 ## Requirements
 - PHP >= 8.1
