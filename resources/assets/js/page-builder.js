@@ -68,7 +68,7 @@ async function addBlockToColumn(evt) {
 // Create HTML for block editor
 async function createBlockEditor(type, content = "") {
   let html = null;
-  await fetch(route("page-builder.render-block"), {
+  await fetch("/page-builder/render-block", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -222,7 +222,7 @@ function initPreview(callback = () => {
       const blocks = updateBlocksInput(currentLocale);
       const iframe = document.getElementById("preview-iframe");
 
-      fetch(route("page-builder.preview"), {
+      fetch("/page-builder/preview", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
