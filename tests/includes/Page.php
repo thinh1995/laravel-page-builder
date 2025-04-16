@@ -21,12 +21,12 @@ class Page extends Model
         return PageFactory::new();
     }
 
-    protected function setFormatItem(&$data, Model $block): void
+    protected function setFormatItem(array &$data, Model $block): void
     {
         $data['content'] = $block->type === 'text' ? e($data['content']) : $data['content'];
     }
 
-    public function getFormatItem($data, Model $block)
+    public function getFormatItem(array|Model $data, Model $block): array|Model
     {
         $data['content'] = $block->type === 'text' ? htmlspecialchars_decode($data['content']) : $data['content'];
 

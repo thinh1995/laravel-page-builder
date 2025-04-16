@@ -75,7 +75,7 @@ trait HasBlocks
                     ->withTimestamps();
     }
 
-    protected function transformBlockItems(&$data): void
+    protected function transformBlockItems(array &$data): void
     {
         $blocks = app(config('page-builder.models.block'))::all();
 
@@ -90,11 +90,11 @@ trait HasBlocks
         }
     }
 
-    public function setFormatItem(&$data, Model $block): void
+    public function setFormatItem(array &$data, Model $block): void
     {
     }
 
-    public function getFormatItem($data, Model $block)
+    public function getFormatItem(array|Model $data, Model $block): array|Model
     {
         return $data;
     }
