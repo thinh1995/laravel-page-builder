@@ -14,14 +14,12 @@ class BlockTranslationFactory extends Factory
 
     public function definition(): array
     {
-        $block = Block::factory()->create();
-
         return [
             'name'        => $this->faker->name,
             'description' => $this->faker->text,
             'locale'      => $this->faker->randomElement(config('page-builder.locales')),
             'icon'        => $this->faker->imageUrl(200, 200),
-            'block_id'    => $block->id,
+            'block_id'    => Block::factory(),
         ];
     }
 }

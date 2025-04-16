@@ -51,6 +51,7 @@
     "scripts": {
         "test": "phpunit",
         "phpcs": "phpcs",
-        "phpcbf": "phpcbf"
+        "phpcbf": "phpcbf",
+        "badge-coverage": "php-coverage-badger ./clover.xml ./badge-coverage.svg"
     }
 }

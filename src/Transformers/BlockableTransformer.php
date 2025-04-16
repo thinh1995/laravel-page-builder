@@ -31,7 +31,7 @@ class BlockableTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeCategories(Blockable $blockable): Item
+    public function includeBlock(Blockable $blockable): Item
     {
         return $this->item($blockable->block, new BlockTransformer(), 'block');
     }

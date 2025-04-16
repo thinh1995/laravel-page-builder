@@ -14,10 +14,8 @@ class BlockableFactory extends Factory
 
     public function definition(): array
     {
-        $block = Block::factory()->create();
-
         return [
-            'block_id'       => $block->id,
+            'block_id'       => Block::factory(),
             'blockable_id'   => $this->faker->numberBetween(1, 10),
             'blockable_type' => 'App\Models\Page',
             'parent_id'      => null,
