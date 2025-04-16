@@ -3,7 +3,7 @@
   $initialBlocks = [];
   if (isset($model)) {
       foreach ($locales as $locale) {
-          $initialBlocks[$locale] = $model->getBlocksByLocale($locale)->toArray();
+          $initialBlocks[$locale] = $model->getBlockItemsByLocale($locale)->toArray();
       }
   } else {
       foreach ($locales as $locale) {
