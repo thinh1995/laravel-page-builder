@@ -12,7 +12,7 @@
 >
     <coverage includeUncoveredFiles="true">
         <report>
-            <clover outputFile="clover.xml" />
+            <clover outputFile="tests/_reports/clover.xml" />
         </report>
     </coverage>
     <testsuites>

@@ -28,11 +28,17 @@ class BlockTranslation extends Model
         $this->setTable(config('page-builder.tables.block_translation'));
     }
 
+    /**
+     * @return BlockTranslationFactory
+     */
     public static function newFactory(): BlockTranslationFactory
     {
         return BlockTranslationFactory::new();
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function block(): BelongsTo
     {
         return $this->belongsTo(Block::class);

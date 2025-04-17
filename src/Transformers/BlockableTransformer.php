@@ -14,6 +14,11 @@ class BlockableTransformer extends TransformerAbstract
         'block',
     ];
 
+    /**
+     * @param Blockable $blockable
+     *
+     * @return array
+     */
     public function transform(Blockable $blockable): array
     {
         return [
@@ -31,6 +36,11 @@ class BlockableTransformer extends TransformerAbstract
         ];
     }
 
+    /**
+     * @param Blockable $blockable
+     *
+     * @return Item
+     */
     public function includeBlock(Blockable $blockable): Item
     {
         return $this->item($blockable->block, new BlockTransformer(), 'block');

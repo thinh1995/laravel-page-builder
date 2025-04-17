@@ -16,6 +16,7 @@ class CreateBlockCommand extends Command
     protected $description = 'Create block for page builder.';
 
     /**
+     * @return void
      * @throws Throwable
      */
     public function handle(): void
@@ -45,6 +46,11 @@ class CreateBlockCommand extends Command
         $this->info('Created the block successfully!!!');
     }
 
+    /**
+     * @param string $type
+     *
+     * @return bool
+     */
     private function isTypeExisted(string $type): bool
     {
         return app(config('page-builder.models.block'))::where('type', $type)->exists();

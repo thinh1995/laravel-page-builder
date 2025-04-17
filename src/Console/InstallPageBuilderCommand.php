@@ -16,6 +16,9 @@ class InstallPageBuilderCommand extends Command
 
     protected $description = 'Install Page Builder package';
 
+    /**
+     * @return void
+     */
     public function handle(): void
     {
         $this->info('Installing Page Builder...');
@@ -27,6 +30,9 @@ class InstallPageBuilderCommand extends Command
         $this->info('Installed Page Builder successfully!!!');
     }
 
+    /**
+     * @return array
+     */
     private function getStepData(): array
     {
         return [
@@ -76,6 +82,14 @@ class InstallPageBuilderCommand extends Command
         ];
     }
 
+    /**
+     * @param string       $tag
+     * @param array|string $path
+     * @param string       $pathType
+     * @param bool         $canOverwrite
+     *
+     * @return void
+     */
     private function runStep(string $tag, array|string $path, string $pathType, bool $canOverwrite): void
     {
         $this->info("Publishing $tag...");
@@ -116,6 +130,11 @@ class InstallPageBuilderCommand extends Command
         $this->info("The $tag already exists!");
     }
 
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
     private function fileExist(string $path): bool
     {
         $path     = base_path($path);
@@ -134,6 +153,11 @@ class InstallPageBuilderCommand extends Command
         return File::exists($path);
     }
 
+    /**
+     * @param string|array $path
+     *
+     * @return bool
+     */
     private function filesExist(string|array $path): bool
     {
         if (is_array($path)) {
@@ -149,6 +173,12 @@ class InstallPageBuilderCommand extends Command
         return $this->fileExist($path);
     }
 
+    /**
+     * @param string $tag
+     * @param bool   $force
+     *
+     * @return void
+     */
     private function publish(string $tag, bool $force = false): void
     {
         $params = [
@@ -160,6 +190,11 @@ class InstallPageBuilderCommand extends Command
         $this->call('vendor:publish', $params);
     }
 
+    /**
+     * @param string|array $path
+     *
+     * @return bool
+     */
     private function shouldOverwrite(string|array $path): bool
     {
         $question = is_array($path) ?

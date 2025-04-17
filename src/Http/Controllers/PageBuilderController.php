@@ -7,9 +7,16 @@ namespace Thinhnx\LaravelPageBuilder\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class PageBuilderController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return View|JsonResponse
+     * @throws Throwable
+     */
     public function renderBlock(Request $request): View|JsonResponse
     {
         $request->validate(['type' => ['required', 'exists:' . config('page-builder.tables.block') . ',type']]);
@@ -26,6 +33,12 @@ class PageBuilderController extends Controller
         return view("page-builder::blocks.$type", compact('content'));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return View|JsonResponse
+     * @throws Throwable
+     */
     public function preview(Request $request): View|JsonResponse
     {
         $request->validate([

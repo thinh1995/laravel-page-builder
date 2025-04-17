@@ -30,6 +30,9 @@ class Block extends Model
         $this->setTable(config('page-builder.tables.block'));
     }
 
+    /**
+     * @return BlockFactory
+     */
     protected static function newFactory(): BlockFactory
     {
         return BlockFactory::new();

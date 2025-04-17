@@ -11,6 +11,9 @@ class BlockFactory extends Factory
 {
     protected $model = Block::class;
 
+    /**
+     * @return array
+     */
     public function definition(): array
     {
         return [

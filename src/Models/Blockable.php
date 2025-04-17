@@ -41,6 +41,9 @@ class Blockable extends Model
         $this->setTable(config('page-builder.tables.blockable'));
     }
 
+    /**
+     * @return BlockableFactory
+     */
     public static function newFactory(): BlockableFactory
     {
         return BlockableFactory::new();

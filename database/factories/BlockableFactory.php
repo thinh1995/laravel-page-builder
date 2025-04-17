@@ -12,6 +12,9 @@ class BlockableFactory extends Factory
 {
     protected $model = Blockable::class;
 
+    /**
+     * @return array
+     */
     public function definition(): array
     {
         return [

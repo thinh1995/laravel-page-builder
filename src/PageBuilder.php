@@ -17,6 +17,12 @@ class PageBuilder
         $this->viewFactory = $viewFactory;
     }
 
+    /**
+     * @param Model|null $model
+     * @param array      $locales
+     *
+     * @return View
+     */
     public function render(?Model $model = null, array $locales = []): View
     {
         $locales = empty($locales) ? config('page-builder.locales') : $locales;

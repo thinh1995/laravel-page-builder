@@ -11,6 +11,9 @@ use Thinhnx\LaravelPageBuilder\Console\InstallPageBuilderCommand;
 
 class LaravelPageBuilderProvider extends ServiceProvider
 {
+    /**
+     * @return void
+     */
     public function register(): void
     {
         $this->app->singleton(PageBuilder::class, PageBuilder::class);
@@ -18,6 +21,9 @@ class LaravelPageBuilderProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/page-builder.php', 'page-builder');
     }
 
+    /**
+     * @return void
+     */
     public function boot(): void
     {
         $this->registerRoutes();
@@ -69,6 +75,9 @@ class LaravelPageBuilderProvider extends ServiceProvider
         }
     }
 
+    /**
+     * @return void
+     */
     protected function registerRoutes(): void
     {
         Route::group($this->routeConfiguration(), function () {
@@ -76,6 +85,9 @@ class LaravelPageBuilderProvider extends ServiceProvider
         });
     }
 
+    /**
+     * @return array
+     */
     protected function routeConfiguration(): array
     {
         return [

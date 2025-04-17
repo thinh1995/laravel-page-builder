@@ -9,6 +9,11 @@ use Thinhnx\LaravelPageBuilder\Models\BlockTranslation;
 
 class BlockTranslationTransformer extends TransformerAbstract
 {
+    /**
+     * @param BlockTranslation $blockTranslation
+     *
+     * @return array
+     */
     public function transform(BlockTranslation $blockTranslation): array
     {
         return [

@@ -12,6 +12,11 @@ class BlockTransformer extends TransformerAbstract
 {
     protected array $defaultIncludes = ['translations'];
 
+    /**
+     * @param Block $block
+     *
+     * @return array
+     */
     public function transform(Block $block): array
     {
         return [
@@ -24,6 +29,11 @@ class BlockTransformer extends TransformerAbstract
         ];
     }
 
+    /**
+     * @param Block $block
+     *
+     * @return Collection
+     */
     public function includeTranslations(Block $block): Collection
     {
         return $this->collection($block->translations, new BlockTranslationTransformer(), 'translations');

@@ -12,6 +12,9 @@ use Thinhnx\LaravelPageBuilder\PageBuilder as PageBuilderSingleton;
  */
 class PageBuilder extends Facade
 {
+    /**
+     * @return string
+     */
     protected static function getFacadeAccessor(): string
     {
         return PageBuilderSingleton::class;

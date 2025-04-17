@@ -12,6 +12,9 @@ class BlockTranslationFactory extends Factory
 {
     protected $model = BlockTranslation::class;
 
+    /**
+     * @return array
+     */
     public function definition(): array
     {
         return [
