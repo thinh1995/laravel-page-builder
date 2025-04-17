@@ -1,8 +1,8 @@
-<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+<div class="modal fade" id="preview-modal" tabindex="-1" aria-labelledby="preview-modal-label" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="previewModalLabel">{{ __('page-builder.view.list_blocks') }}</h5>
+        <h5 class="modal-title" id="preview-modal-label">{{ __('page-builder.view.list_blocks') }}</h5>
         <div class="switch-field">
           <input type="radio" id="device-desktop" name="device-select" value="desktop" checked/>
           <label for="device-desktop">

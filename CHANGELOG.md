@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add DocBlock for functions.
 
 ### Changed
-- Update CHANGELOG.md.
+- Update JS supports multiple Page Builder views on a page.
+- Auto finds the closet form when init Page Builder views.
 - Remove unused files.
 
 ## [1.0.0] - 2025-04-16
