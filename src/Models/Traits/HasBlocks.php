@@ -86,7 +86,7 @@ trait HasBlocks
             $this->setFormatItem($data[$index], $blocks->firstWhere('id', $item['block_id']));
             $data[$index]['blockable_id']   = $this->id;
             $data[$index]['blockable_type'] = self::class;
-            $data[$index]['locale'] = $locale;
+            $data[$index]['locale']         = $locale;
 
             if (isset($item['children'])) {
                 $this->transformBlockItems($data[$index]['children'], $locale);
@@ -165,20 +165,28 @@ trait HasBlocks
     {
     }
 
-    public function getBlockItemsByLocale(?string $locale = null): Collection
+    public function getBlockItems(string|array|null $locales = null): Collection
     {
-        $locale ??= config('page-builder.default_locale');
+        $locales ??= config('page-builder.locales');
 
-        return Blockable::with(relations: 'block')
-                        ->where('locale', $locale)
-                        ->where('blockable_type', self::class)
-                        ->where('blockable_id', $this->id)
-                        ->orderBy('column_index')
-                        ->orderBy('order')
-                        ->get()
-                        ->transform(function ($item) {
-                            return $this->getFormatItem($item, $item->block);
-                        })
-                        ->toTree();
+        $query = Blockable::with('block');
+
+        if ($locales) {
+            if (is_array($locales)) {
+                $query->whereIn('locale', $locales);
+            } else {
+                $query->where('locale', $locales);
+            }
+        }
+
+        return $query->where('blockable_type', self::class)
+                     ->where('blockable_id', $this->id)
+                     ->orderBy('column_index')
+                     ->orderBy('order')
+                     ->get()
+                     ->transform(function ($item) {
+                         return $this->getFormatItem($item, $item->block);
+                     })
+                     ->toTree();
     }
 }

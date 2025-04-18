@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimize the queries using in HasBlocks trait.
 - Check for memory leaks.
 
+## [1.0.2] - 2025-04-18
+
+## Added
+- Use cache for get the list of blocks when rendering Page Builder.
+
+### Changed
+- Rename function `getBlockItemsByLocale()` in `HasBlocks` trait to `getBlockItems()`
+
 ## [1.0.1] - 2025-04-17
 
 ## Added

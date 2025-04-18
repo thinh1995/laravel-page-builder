@@ -49,10 +49,10 @@ class BlockTest extends TestCase
 
         $this->assertEquals(2, $page->blocks->count());
         $this->assertEquals(2, $page->blockItems->count());
-        $this->assertInstanceOf(Blockable::class, $page->getBlockItemsByLocale('vi')->first());
-        $this->assertInstanceOf(Blockable::class, $page->getBlockItemsByLocale('en')->first());
+        $this->assertInstanceOf(Blockable::class, $page->getBlockItems('vi')->first());
+        $this->assertInstanceOf(Blockable::class, $page->getBlockItems('en')->first());
 
-        $page->removeBlockItem($page->getBlockItemsByLocale('vi')->first()->id, 'vi');
+        $page->removeBlockItem($page->getBlockItems('vi')->first()->id, 'vi');
         $this->assertEquals(1, $page->blockItems->count());
     }
 
@@ -73,8 +73,8 @@ class BlockTest extends TestCase
 
         $this->assertEquals(2, $page->blocks->count());
         $this->assertEquals(2, $page->blockItems()->count());
-        $this->assertInstanceOf(Blockable::class, $page->getBlockItemsByLocale('vi')->first());
-        $this->assertInstanceOf(Blockable::class, $page->getBlockItemsByLocale('en')->first());
+        $this->assertInstanceOf(Blockable::class, $page->getBlockItems('vi')->first());
+        $this->assertInstanceOf(Blockable::class, $page->getBlockItems('en')->first());
 
         $page->delete();
 

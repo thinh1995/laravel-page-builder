@@ -37,4 +37,13 @@ return [
         'block_translation' => \Thinhnx\LaravelPageBuilder\Transformers\BlockTranslationTransformer::class,
         'blockable'         => \Thinhnx\LaravelPageBuilder\Transformers\BlockableTransformer::class,
     ],
+
+    // Cache config
+    'cache' => [
+        'enabled' => true,
+        'time'    => 60 * 60 * 24,
+        'keys'    => [
+            'blocks' => 'pagebuilder_blocks',
+        ],
+    ],
 ];

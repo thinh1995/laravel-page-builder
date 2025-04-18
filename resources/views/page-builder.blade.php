@@ -1,24 +1,8 @@
-@php
-  $pageBuilderId = 'page-builder-' . \Illuminate\Support\Str::random(8);
-  $blocks = app(config('page-builder.models.block'))::all();
-  $initialBlocks = [];
-
-  foreach ($locales as $locale) {
-        $initialBlocks[$locale] = [];
-  }
-
-  if (isset($model)) {
-      foreach ($locales as $locale) {
-          $initialBlocks[$locale] = $model->getBlockItemsByLocale($locale)->toArray();
-      }
-  }
-@endphp
-
-<div class="page-builder" id="{{ $pageBuilderId }}">
+<div class="page-builder" id="{{ $id }}">
   <div class="row">
     <div class="col-md-9">
       <h3>{{ __('page-builder.view.heading') }}</h3>
-      @if (count(config('page-builder.locales')) > 1)
+      @if (is_array($locales) && count($locales) > 1)
         <ul class="nav nav-tabs mb-3">
           @foreach ($locales as $locale)
             <li class="nav-item">
@@ -30,7 +14,7 @@
         <div class="tab-content">
           @foreach ($locales as $locale)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                 id="editor-{{ $locale }}-{{ $pageBuilderId }}">
+                 id="editor-{{ $locale }}-{{ $id }}">
               <div class="sortable-container mb-3" data-locale="{{ $locale }}"></div>
               <button type="button" class="btn btn-info mb-3 preview-btn" data-locale="{{ $locale }}"
                       data-bs-toggle="modal" data-bs-target="#preview-modal">
@@ -45,10 +29,14 @@
             </div>
           @endforeach
         </div>
+
+        @foreach ($locales as $locale)
+          <input type="hidden" name="blocks[{{ $locale }}]" id="blocks-{{ $locale }}-{{ $id }}">
+        @endforeach
       @else
-        <div class="sortable-container mb-3" data-locale="{{ config('page-builder.locales')[0] }}"></div>
+        <div class="sortable-container mb-3" data-locale="{{ $locales }}"></div>
         <button type="button" class="btn btn-info mb-3 preview-btn"
-                data-locale="{{ config('page-builder.locales')[0] }}" data-bs-toggle="modal"
+                data-locale="{{ $locales }}" data-bs-toggle="modal"
                 data-bs-target="#preview-modal">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -58,26 +46,24 @@
             <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
           </svg> {{ __('page-builder.view.preview') }}
         </button>
+        <input type="hidden" name="blocks[{{ $locales }}]" id="blocks-{{ $locales }}-{{ $id }}">
       @endif
     </div>
     <div class="col-md-3">
       <h3>{{ __('page-builder.view.list_blocks') }}</h3>
-      <div id="block-list-{{ $pageBuilderId }}" class="sortable-container">
-        @foreach ($blocks as $block)
-          <div class="block" data-page-builder-id="{{ $pageBuilderId }}"
-               data-type="{{ $block->type }}" data-id="{{ $block->id }}"
-               data-is-layout="{{ $block->is_layout }}">
-            {!! $block->icon !!} {{ $block->name }}
-          </div>
-        @endforeach
+      <div id="block-list-{{ $id }}" class="sortable-container">
+        @if(is_array($blocks))
+          @foreach($blocks as $block)
+            <div class="block" data-page-builder-id="{{ $id }}"
+                 data-type="{{ $block->type }}" data-id="{{ $block->id }}"
+                 data-is-layout="{{ $block->is_layout }}">
+              {!! $block->icon !!} {{ $block->name }}
+            </div>
+          @endforeach
+        @endif
       </div>
     </div>
   </div>
-
-  @foreach ($locales as $locale)
-    <input type="hidden" name="blocks[{{ $locale }}]" id="blocks-{{ $locale }}-{{ $pageBuilderId }}">
-  @endforeach
-
   @include('page-builder::partials.modal-preview')
 </div>
 
@@ -88,13 +74,16 @@
 @pushonce('script')
   <script src="{{ asset('packages/thinhnx/page-builder/libs/SortableJS/Sortable.min.js') }}"></script>
   <script src="{{ asset('packages/thinhnx/page-builder/js/page-builder.js') }}"></script>
+@endpushonce
+
+@push('script')
   <script>
     document.addEventListener('DOMContentLoaded', async function () {
-      await initPageBuilder('{{ $pageBuilderId }}', @json($initialBlocks), getContext);
+      await initPageBuilder('{{ $id }}', @json($initialBlocks), getContext);
     });
 
     function getContext() {
       return {};
     }
   </script>
-@endpushonce
+@endpush
