@@ -52,15 +52,13 @@
     <div class="col-md-3">
       <h3>{{ __('page-builder.view.list_blocks') }}</h3>
       <div id="block-list-{{ $id }}" class="sortable-container">
-        @if(is_array($blocks))
-          @foreach($blocks as $block)
-            <div class="block" data-page-builder-id="{{ $id }}"
-                 data-type="{{ $block->type }}" data-id="{{ $block->id }}"
-                 data-is-layout="{{ $block->is_layout }}">
-              {!! $block->icon !!} {{ $block->name }}
-            </div>
-          @endforeach
-        @endif
+        @foreach($blocks as $block)
+          <div class="block" data-page-builder-id="{{ $id }}"
+               data-type="{{ $block->type }}" data-id="{{ $block->id }}"
+               data-is-layout="{{ $block->is_layout }}">
+            {!! $block->icon !!} {{ $block->name }}
+          </div>
+        @endforeach
       </div>
     </div>
   </div>

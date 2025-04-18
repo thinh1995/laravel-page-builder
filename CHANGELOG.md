@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 - Use cache for get the list of blocks when rendering Page Builder.
+- Add cache config
 
 ### Changed
 - Rename function `getBlockItemsByLocale()` in `HasBlocks` trait to `getBlockItems()`
