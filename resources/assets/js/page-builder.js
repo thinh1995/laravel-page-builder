@@ -95,9 +95,9 @@ class PageBuilder {
               PageBuilder.removeHighlightDroppableAreas();
               PageBuilder.updateBlockItems(pbId, locale);
             },
-            onStart: () => this.highlightDroppableAreas(pbId),
-            onOver: (evt) => this.handleDragOver(evt, col),
-            onOut: () => this.removeHighlight(col)
+            onStart: () => PageBuilder.highlightDroppableAreas(pbId),
+            onOver: (evt) => PageBuilder.handleDragOver(evt, col),
+            onOut: () => PageBuilder.removeHighlight(col)
           });
         });
       }
@@ -188,6 +188,31 @@ class PageBuilder {
       console.error('Error:', error);
       return '';
     }
+  };
+
+  static getBlockItems(container, colIndex = 0) {
+    if (!container?.childElementCount) return [];
+
+    return Array.from(container.children).map((item, order) => {
+      const block = item.querySelector('.block-editor');
+      if (!block) return null;
+
+      const parent = block.closest('[data-type]');
+      const children = parent.dataset.isLayout
+          ? Array.from(block.querySelector('.row').children).
+              flatMap((col, index) => this.getBlockItems(
+                  col.querySelector('.sortable-column'), index))
+          : [];
+
+      return {
+        block_id: parent.dataset.blockId,
+        type: parent.dataset.type,
+        content: this.getBlockContent(block),
+        column_index: colIndex,
+        order,
+        children
+      };
+    }).filter(Boolean);
   };
 
   static highlightDroppableAreas(pbId) {
@@ -331,30 +356,5 @@ class PageBuilder {
         blockItems[locale]?.length ? this.initBlockItems(pbId, locale,
             blockItems[locale]) : null
     ));
-  };
-
-  static getBlockItems(container, colIndex = 0) {
-    if (!container?.childElementCount) return [];
-
-    return Array.from(container.children).map((item, order) => {
-      const block = item.querySelector('.block-editor');
-      if (!block) return null;
-
-      const parent = block.closest('[data-type]');
-      const children = parent.dataset.isLayout
-          ? Array.from(block.querySelector('.row').children).
-              flatMap((col, index) => this.getBlockItems(
-                  col.querySelector('.sortable-column'), index))
-          : [];
-
-      return {
-        block_id: parent.dataset.blockId,
-        type: parent.dataset.type,
-        content: this.getBlockContent(block),
-        column_index: colIndex,
-        order,
-        children
-      };
-    }).filter(Boolean);
   };
 }

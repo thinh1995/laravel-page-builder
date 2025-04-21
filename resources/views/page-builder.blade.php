@@ -66,12 +66,12 @@
 </div>
 
 @pushonce('css')
-  <link rel="stylesheet" type="text/css" href="{{ asset('packages/thinhnx/page-builder/css/page-builder.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('packages/thinhnx/page-builder/css/page-builder.min.css') }}">
 @endpushonce
 
 @pushonce('script')
   <script src="{{ asset('packages/thinhnx/page-builder/libs/SortableJS/Sortable.min.js') }}"></script>
-  <script src="{{ asset('packages/thinhnx/page-builder/js/page-builder.js') }}"></script>
+  <script src="{{ asset('packages/thinhnx/page-builder/js/page-builder.min.js') }}"></script>
 @endpushonce
 
 @push('script')

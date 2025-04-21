@@ -64,13 +64,6 @@ return [
         'blockable'         => \Thinhnx\LaravelPageBuilder\Models\Blockable::class,
     ],
 
-    // The transformers are used in the package; you can use your own transformers, as long as they inherit the transformers below
-    'transformers'   => [
-        'block'             => \Thinhnx\LaravelPageBuilder\Transformers\BlockTransformer::class,
-        'block_translation' => \Thinhnx\LaravelPageBuilder\Transformers\BlockTranslationTransformer::class,
-        'blockable'         => \Thinhnx\LaravelPageBuilder\Transformers\BlockableTransformer::class,
-    ],
-
     // Cache config
     'cache' => [
         'enabled' => true,
@@ -182,7 +175,8 @@ Create a new block with the following command:
 ```shell
 php artisan page-builder:block:create
 ```
-The console screen will ask you to enter the locale name, type and specify if it is a layout type (a layout type can contain blocks). After running the command, a block view will be created at the path `resources/views/vendor/page-builder/blocks/[type].blade.php`.
+The console screen will ask you to enter the locale name, type and specify if it is a layout type (a layout type can contain blocks). 
+After running the command, a block view will be created at the path `resources/views/vendor/page-builder/blocks/[type].blade.php`.
 
 When updating a block view, you need to note:
 - There must be only one root div tag and it must have the class `block-content`.
@@ -211,7 +205,8 @@ Below is the structure of the view files:
 ```
 
 ### 4. Assets
-The package assets are located at `public/packages/thinhnx/page-builder`. You can update them to suit your project.
+The package assets are located at `public/packages/thinhnx/page-builder`. 
+You can update them to suit your project.
 
 ## Testing
 ```shell
