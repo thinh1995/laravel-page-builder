@@ -1,360 +1,360 @@
-// Helper function
-function b64DecodeUnicode(str) {
-  return decodeURIComponent(atob(str)
-    .split('')
-    .map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0)
-        .toString(16))
-        .slice(-2);
-    })
-    .join(''));
-}
+class PageBuilder {
+  static config = {
+    renderBlockUrl: '/page-builder/render-block',
+    previewUrl: '/page-builder/preview',
+    previewContext: {}
+  };
 
-// Initialize Sortable for the available blocklist
-function initBlockList(pageBuilderId) {
-  const blockList = document.getElementById(`block-list-${pageBuilderId}`);
+  static b64Decode(str) {
+    try {
+      return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    } catch (e) {
+      console.error('Error:', e);
+      return '';
+    }
+  };
 
-  if (blockList) {
-    Sortable.create(blockList, {
-      group: {
-        name: "blocks",
-        pull: "clone",
-        put: false
-      },
-      sort: false,
-    });
-  }
-}
+  static blocksRendered() {};
 
-// Initialize Sortable for each language's editor
-async function initEditors(pageBuilderId) {
-  const pageBuilder = document.getElementById(pageBuilderId);
+  static beforePreview() {};
 
-  pageBuilder.querySelectorAll(".sortable-container")
-    .forEach((container) => {
-      Sortable.create(container, {
-        group: "blocks",
-        animation: 150,
-        onAdd: addBlockToColumn,
-        onEnd: () => {
-          updateBlocksInput(pageBuilderId, container.getAttribute("data-locale"));
-        },
-      });
-    });
-}
-
-// Add a block to the column of layout
-async function addBlockToColumn(evt) {
-  let block = evt.item;
-  const pageBuilderId = block.getAttribute("data-page-builder-id");
-  const type = block.getAttribute("data-type");
-  const is_layout = block.getAttribute("data-is-layout");
-  block.innerHTML = await getBlockHtml(type);
-  block.classList.remove("block");
-
-  if (is_layout) {
-    block.querySelectorAll(".sortable-column")
-      .forEach((column) => {
-        Sortable.create(column, {
-          group: "blocks",
-          onAdd: addBlockToColumn,
-          onEnd: () =>
-            updateBlocksInput(
-              pageBuilderId,
-              evt.to.closest(".sortable-container")
-                .getAttribute("data-locale")
-            ),
-        });
-      });
+  static getBlockContent(block) {
+    return block.querySelector('.block-content')?.value || '';
   }
 
-  block.querySelector(".remove-block")
-    .addEventListener("click", function() {
+  static async renderBlockItems(pbId, locale, data, container) {
+    const fragment = document.createDocumentFragment();
+
+    for (const item of data) {
+      const div = this.createBlockElement(pbId, item,
+          await this.getBlockHtml(item.type, item.content));
+
+      this.attachBlockEventListeners(pbId, div, item.locale);
+
+      if (item.is_layout) {
+        await this.setupLayoutBlock(pbId, item.locale, div,
+            item.children);
+      }
+
+      fragment.appendChild(div);
+    }
+
+    container.appendChild(fragment);
+
+    this.blocksRendered()?.();
+  };
+
+  static createBlockElement(pbId, block, html) {
+    const div = document.createElement('div');
+    div.dataset.pageBuilderId = pbId;
+    div.dataset.type = block.type;
+    div.dataset.blockId = block.block_id;
+    div.dataset.isLayout = block.is_layout;
+    div.innerHTML = html;
+
+    return div;
+  };
+
+  static attachBlockEventListeners(pbId, block, locale) {
+    block.querySelector('.block-remove')?.addEventListener('click', () => {
       block.remove();
-      updateBlocksInput(
-        pageBuilderId,
-        evt.to.closest(".sortable-container")
-          .getAttribute("data-locale")
-      );
+      this.updateBlockItems(pbId, locale);
     });
 
-  block
-    .querySelector(".block-content")
-    ?.addEventListener("input", () =>
-      updateBlocksInput(
-        pageBuilderId,
-        evt.to.closest(".sortable-container")
-          .getAttribute("data-locale")
-      )
-    );
-}
+    block.querySelector('.block-content')?.addEventListener('input', () =>
+        this.updateBlockItems(pbId, locale), {passive: true});
+  };
 
-// Get HTML of the block from the server
-async function getBlockHtml(type, content = "") {
-  let html = null;
-  await fetch(route("page-builder.render-block"), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-TOKEN": $('meta[name="csrf-token"]')
-        .attr("content"),
-      "X-Requested-With": "XMLHttpRequest",
-    },
-    body: JSON.stringify({
-      type: type,
-      content: content
-    }),
-  })
-    .then((response) => response.text())
-    .then((text) => {
-      html = b64DecodeUnicode(JSON.parse(text)
-        .data);
-    });
+  static async addBlockToColumn(evt) {
+    const block = evt.item;
 
-  return html;
-}
+    if (evt.from.id.startsWith('block-list-')) {
+      block.innerHTML = await PageBuilder.getBlockHtml(block.dataset.type);
+      block.classList.remove('block');
+      block.classList.add('sortable-dropped');
 
-// Update blocks data into the hidden input
-function updateBlocksInput(pageBuilderId, locale) {
-  const pageBuilder = document.getElementById(pageBuilderId);
-  const container = pageBuilder.querySelector(`.sortable-container[data-locale="${locale}"]`);
-  let blocks = getBlocksDataFromContainer(container);
-
-  document.getElementById(`blocks-${locale}-${pageBuilderId}`)
-    .value = JSON.stringify(blocks);
-  return blocks;
-}
-
-// Get blocks data from a container
-function getBlocksDataFromContainer(container, column_index = 0) {
-  let blockEditors = [];
-  let blocks = [];
-  let order = 0;
-
-  if (!container || !container.childElementCount) {
-    return {};
-  }
-
-  container.childNodes.forEach((item) => {
-    blockEditors.push(item.querySelector(".block-editor"));
-  });
-
-  for (const block of blockEditors) {
-    let children = [];
-    const type = block.closest("[data-type]")
-      .getAttribute("data-type");
-    const is_layout = block
-      .closest("[data-type]")
-      .getAttribute("data-is-layout");
-    const id = block.closest("[data-type]")
-      .getAttribute("data-id");
-    let content = block.querySelector(".block-content")
-      ?.value || "";
-
-    if (is_layout) {
-      let row = block.querySelector(".row");
-      let columns = [];
-
-      for (let i = 0; i < row.children.length; i++) {
-        columns.push(row.children[i].querySelector(".sortable-column"));
-      }
-
-      columns.forEach((col, index) => {
-        let items = getBlocksDataFromContainer(col, index);
-        if (Array.isArray(items)) {
-          children.push(...getBlocksDataFromContainer(col, index));
-        }
-      });
-    }
-
-    blocks.push({
-      block_id: id,
-      type: type,
-      content: content,
-      column_index: column_index,
-      order: order++,
-      children: children,
-    });
-  }
-
-  return blocks;
-}
-
-// Initialize blocks from database data
-async function initBlocksFromData(pageBuilderId, locale, blocksData) {
-  const pageBuilder = document.getElementById(pageBuilderId);
-  const container = pageBuilder.querySelector(
-    `.sortable-container[data-locale="${locale}"]`
-  );
-  await createBlockFromData(pageBuilderId, locale, blocksData, container);
-}
-
-async function createBlockFromData(
-  pageBuilderId,
-  locale,
-  blocksData,
-  container
-) {
-  for (let block of blocksData) {
-    const div = document.createElement("div");
-    div.setAttribute("data-page-builder-id", pageBuilderId);
-    div.setAttribute("data-type", block.block.type);
-    div.setAttribute("data-id", block.block_id);
-    div.setAttribute("data-is-layout", block.block.is_layout);
-    div.innerHTML = await getBlockHtml(
-      block.block.type,
-      block.content
-    );
-    container.appendChild(div);
-
-    div.querySelector(".remove-block")
-      .addEventListener("click", function() {
-        div.remove();
-        updateBlocksInput(pageBuilderId, locale);
-      });
-    div.querySelector(".block-content")
-      ?.addEventListener("input", () =>
-        updateBlocksInput(pageBuilderId, locale)
-      );
-
-    if (block.block.is_layout) {
-      let colIndex = 0;
-      for (let column of div.querySelectorAll(".sortable-column")) {
-        if (block.children.length) {
-          await createBlockFromData(
-            pageBuilderId,
-            locale,
-            block.children.filter(
-              (item) => item.column_index === colIndex
-            ),
-            column
-          );
-        }
-        colIndex++;
-      }
-
-      div.querySelectorAll(".sortable-column")
-        .forEach(
-          (column) => {
-            Sortable.create(column, {
-              group: "blocks",
-              onAdd: addBlockToColumn,
-              onEnd: () =>
-                updateBlocksInput(
-                  pageBuilderId,
-                  locale
-                ),
-            });
-          }
-        );
-    }
-  }
-}
-
-// Process preview
-function initPreview(pageBuilderId, callback = () => {}) {
-  const pageBuilder = document.getElementById(pageBuilderId);
-  let currentLocale = null;
-
-  pageBuilder.querySelectorAll(".preview-btn")
-    .forEach((btn) => {
-      btn.addEventListener("click", function() {
-        currentLocale = this.getAttribute("data-locale");
-        const blocks = updateBlocksInput(pageBuilderId, currentLocale);
-        const iframe = document.getElementById("preview-iframe");
-
-        fetch(route("page-builder.preview"), {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector(
-              'meta[name="csrf-token"]'
-            )
-              .content,
-            "X-Requested-With": "XMLHttpRequest",
-          },
-          body: JSON.stringify({
-            locale: currentLocale,
-            blocks: blocks,
-            context: callback(),
-          }),
-        })
-          .then((response) => response.text())
-          .then((text) => {
-            iframe.srcdoc = b64DecodeUnicode(JSON.parse(text)
-              .data);
-            updateIframeSize("desktop");
-          })
-          .catch((error) => console.error("Error:", error));
-      });
-    });
-
-  document
-    .querySelectorAll('input[name="device-select"]')
-    .forEach(function(device) {
-      device.addEventListener("change", function() {
-        updateIframeSize(
-          document.querySelector(
-            'input[name="device-select"]:checked'
-          )
-            .value
-        );
-      });
-    });
-}
-
-// Process form submission
-function initFormSubmit(pageBuilderId, locales) {
-  const pageBuilder = document.getElementById(pageBuilderId);
-
-  pageBuilder.closest('form')
-    .addEventListener("submit", function() {
-      locales.forEach((locale) => updateBlocksInput(pageBuilderId, locale));
-      document
-        .querySelectorAll('input[name="device-select"]')
-        .forEach(function(device) {
-          device.disabled = true;
+      if (block.getAttribute('data-is-layout')) {
+        const pbId = block.getAttribute('data-page-builder-id');
+        const locale = evt.to.closest('.sortable-container').
+            getAttribute('data-locale');
+        block.querySelectorAll('.sortable-column').forEach((col) => {
+          Sortable.create(col, {
+            group: {
+              name: `editor-${pbId}`,
+              put: [`block-list-${pbId}`, `editor-${pbId}`]
+            },
+            animation: 150,
+            handle: '.block-title',
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            onAdd: PageBuilder.addBlockToColumn,
+            onEnd: () => {
+              PageBuilder.removeHighlightDroppableAreas();
+              PageBuilder.updateBlockItems(pbId, locale);
+            },
+            onStart: () => this.highlightDroppableAreas(pbId),
+            onOver: (evt) => this.handleDragOver(evt, col),
+            onOut: () => this.removeHighlight(col)
+          });
         });
-    });
-}
-
-// Adjust the size of the iframe
-function updateIframeSize(device) {
-  const iframe = document.getElementById("preview-iframe");
-  const container = document.getElementById("iframe-container");
-
-  switch (device) {
-    case "desktop":
-      iframe.style.width = "100%";
-      container.style.width = "100%";
-      container.style.maxWidth = "none";
-      break;
-    case "tablet":
-      iframe.style.width = "768px";
-      container.style.maxWidth = "768px";
-      break;
-    case "mobile":
-      iframe.style.width = "375px";
-      container.style.maxWidth = "375px";
-      break;
-  }
-}
-
-// Initialize the Page Builder
-async function initPageBuilder(
-  pageBuilderId,
-  initialBlocks = {},
-  getContextCallback = () => {}
-) {
-  initBlockList(pageBuilderId);
-  await initEditors(pageBuilderId);
-  initPreview(pageBuilderId, getContextCallback);
-  initFormSubmit(pageBuilderId, Object.keys(initialBlocks));
-
-  // Initialize blocks from database data
-  for (const locale in initialBlocks) {
-    if (initialBlocks[locale].length > 0) {
-      await initBlocksFromData(pageBuilderId, locale, initialBlocks[locale]);
+      }
     }
+
+    PageBuilder.attachBlockEventListeners(
+        block.dataset.pageBuilderId,
+        block,
+        evt.to.closest('.sortable-container').dataset.locale
+    );
+
+    PageBuilder.blocksRendered()?.();
+    block.classList.remove('sortable-dropped');
   }
+
+  static async setupLayoutBlock(pbId, locale, div, children) {
+    const cols = div.querySelectorAll('.sortable-column');
+
+    await Promise.all(Array.from(cols).map(async (col, index) => {
+      const colChildren = children.filter(
+          child => child.column_index === index);
+      if (colChildren.length) {
+        await this.renderBlockItems(pbId, locale, colChildren, col);
+      }
+
+      Sortable.create(col, {
+        group: {
+          name: `editor-${pbId}`,
+          put: [`block-list-${pbId}`, `editor-${pbId}`]
+        },
+        animation: 150,
+        handle: '.block-title',
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        dragClass: 'sortable-drag',
+        onAdd: this.addBlockToColumn,
+        onEnd: () => {
+          this.removeHighlightDroppableAreas();
+          this.updateBlockItems(pbId, locale);
+        },
+        onStart: () => this.highlightDroppableAreas(pbId),
+        onOver: (evt) => this.handleDragOver(evt, col),
+        onOut: () => this.removeHighlight(col)
+      });
+    }));
+  }
+
+  static updateIframeSize(device) {
+    const iframe = document.getElementById('preview-iframe');
+    const container = document.getElementById('iframe-container');
+    const sizes = {
+      desktop: {width: '100%', maxWidth: 'none'},
+      tablet: {width: '768px', maxWidth: '768px'},
+      mobile: {width: '375px', maxWidth: '375px'}
+    }[device];
+
+    if (sizes) {
+      iframe.style.width = sizes.width;
+      container.style.width = sizes.width;
+      container.style.maxWidth = sizes.maxWidth;
+    }
+  };
+
+  static updateBlockItems(pbId, locale) {
+    const container = document.getElementById(pbId).querySelector(
+        `.sortable-container[data-locale="${locale}"]`);
+    let blocks = this.getBlockItems(container);
+    document.getElementById(`blocks-${locale}-${pbId}`).value = JSON.stringify(
+        blocks);
+    return blocks;
+  };
+
+  static async getBlockHtml(type, content = '') {
+    try {
+      const response = await fetch(this.config.renderBlockUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector(
+              'meta[name="csrf-token"]').content,
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({type, content})
+      });
+      const {data} = await response.json();
+      return this.b64Decode(data);
+    } catch (error) {
+      console.error('Error:', error);
+      return '';
+    }
+  };
+
+  static highlightDroppableAreas(pbId) {
+    document.querySelectorAll(
+        `.sortable-container[data-page-builder-id="${pbId}"]`).
+        forEach((container) => {
+          container.classList.add('droppable-highlight');
+        });
+
+    document.querySelectorAll(
+        `[data-page-builder-id="${pbId}"][data-is-layout="true"] .sortable-column`).
+        forEach((column) => {
+          column.classList.add('droppable-highlight');
+        });
+  }
+
+  static removeHighlightDroppableAreas() {
+    document.querySelectorAll('.droppable-highlight').forEach((el) => {
+      el.classList.remove('droppable-highlight');
+    });
+  }
+
+  static handleDragOver(evt, container) {
+    container.classList.add('droppable-highlight');
+  }
+
+  static removeHighlight(container) {
+    container.classList.remove('droppable-highlight');
+  }
+
+  static initBlockList(pbId) {
+    const blockList = document.getElementById(`block-list-${pbId}`);
+    if (blockList) {
+      Sortable.create(blockList, {
+        group: {
+          name: `block-list-${pbId}`, put: false, pull: 'clone'
+        },
+        sort: false,
+        animation: 150,
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        dragClass: 'sortable-drag',
+        onStart: () => this.highlightDroppableAreas(pbId),
+        onEnd: () => this.removeHighlightDroppableAreas()
+      });
+    }
+  };
+
+  static async initBlockItems(pbId, locale, data) {
+    const container = document.getElementById(pbId).querySelector(
+        `.sortable-container[data-locale="${locale}"]`);
+    await this.renderBlockItems(pbId, locale, data, container);
+  };
+
+  static initEditors(pbId) {
+    const pb = document.getElementById(pbId);
+    pb.querySelectorAll('.sortable-container').
+        forEach((container) => {
+          Sortable.create(container, {
+            group: {
+              name: `editor-${pbId}`,
+              put: [`block-list-${pbId}`, `editor-${pbId}`]
+            },
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            handle: '.block-title',
+            onStart: () => this.highlightDroppableAreas(pbId),
+            onAdd: this.addBlockToColumn,
+            onEnd: () => {
+              this.removeHighlightDroppableAreas();
+              this.updateBlockItems(pbId,
+                  container.getAttribute('data-locale'));
+            },
+            onOver: (evt) => this.handleDragOver(evt, container),
+            onOut: () => this.removeHighlight(container)
+          });
+        });
+  };
+
+  static initPreview(pbId) {
+    const pb = document.getElementById(pbId);
+    pb.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const locale = btn.dataset.locale;
+        const blocks = this.updateBlockItems(pbId, locale);
+        const iframe = document.getElementById('preview-iframe');
+
+        this.beforePreview?.();
+
+        try {
+          const response = await fetch(this.config.previewUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector(
+                  'meta[name="csrf-token"]').content,
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify(
+                {locale, blocks, context: this.config.previewContext})
+          });
+          const {data} = await response.json();
+          iframe.srcdoc = this.b64Decode(data);
+          document.getElementById('device-desktop').checked = true;
+          this.updateIframeSize('desktop');
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      });
+    });
+
+    document.querySelectorAll('input[name="device-select"]').forEach(device => {
+      device.addEventListener('change', () =>
+              this.updateIframeSize(document.querySelector(
+                  'input[name="device-select"]:checked').value),
+          {passive: true}
+      );
+    });
+  };
+
+  static initFormSubmit(pbId, locales = []) {
+    const form = document.getElementById(pbId).closest('form');
+    form.addEventListener('submit', () => {
+      locales.forEach((locale) => this.updateBlockItems(pbId, locale));
+      document.querySelectorAll('input[name="device-select"]').
+          forEach((device) => device.disabled = true);
+    });
+  };
+
+  static async init(pbId, locales, blockItems) {
+    locales = Array.isArray(locales) ? locales : [locales];
+
+    this.initBlockList(pbId);
+    this.initEditors(pbId);
+    this.initPreview(pbId);
+    this.initFormSubmit(pbId, locales);
+
+    await Promise.all(locales.map(locale =>
+        blockItems[locale]?.length ? this.initBlockItems(pbId, locale,
+            blockItems[locale]) : null
+    ));
+  };
+
+  static getBlockItems(container, colIndex = 0) {
+    if (!container?.childElementCount) return [];
+
+    return Array.from(container.children).map((item, order) => {
+      const block = item.querySelector('.block-editor');
+      if (!block) return null;
+
+      const parent = block.closest('[data-type]');
+      const children = parent.dataset.isLayout
+          ? Array.from(block.querySelector('.row').children).
+              flatMap((col, index) => this.getBlockItems(
+                  col.querySelector('.sortable-column'), index))
+          : [];
+
+      return {
+        block_id: parent.dataset.blockId,
+        type: parent.dataset.type,
+        content: this.getBlockContent(block),
+        column_index: colIndex,
+        order,
+        children
+      };
+    }).filter(Boolean);
+  };
 }
