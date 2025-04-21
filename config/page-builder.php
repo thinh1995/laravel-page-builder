@@ -31,13 +31,6 @@ return [
         'blockable'         => \Thinhnx\LaravelPageBuilder\Models\Blockable::class,
     ],
 
-    // The transformers are used in the package; you can use your own transformers, as long as they inherit the transformers below
-    'transformers'   => [
-        'block'             => \Thinhnx\LaravelPageBuilder\Transformers\BlockTransformer::class,
-        'block_translation' => \Thinhnx\LaravelPageBuilder\Transformers\BlockTranslationTransformer::class,
-        'blockable'         => \Thinhnx\LaravelPageBuilder\Transformers\BlockableTransformer::class,
-    ],
-
     // Cache config
     'cache' => [
         'enabled' => true,

@@ -7,6 +7,7 @@ namespace Thinhnx\LaravelPageBuilder;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -94,8 +95,34 @@ class PageBuilder
         }
 
         $initialBlocks[$locales] = $model && method_exists($model, 'getBlockItems') ?
-            $model->getBlockItems($locales)->toArray() : [];
+            $this->transformBlockItems($model->getBlockItems($locales)) : [];
 
         return $initialBlocks;
+    }
+
+    /**
+     * @param Collection $items
+     *
+     * @return array
+     */
+    private function transformBlockItems(Collection $items): array
+    {
+        $data = [];
+
+        foreach ($items as $item) {
+            $data[] = [
+                'id'           => $item->id,
+                'content'      => $item->content,
+                'order'        => $item->order,
+                'column_index' => $item->column_index,
+                'locale'       => $item->locale,
+                'block_id'     => $item->block_id,
+                'type'         => $item->block->type,
+                'is_layout'    => $item->block->is_layout,
+                'children'     => $this->transformBlockItems($item->children),
+            ];
+        }
+
+        return $data;
     }
 }

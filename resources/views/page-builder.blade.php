@@ -51,10 +51,10 @@
     </div>
     <div class="col-md-3">
       <h3>{{ __('page-builder.view.list_blocks') }}</h3>
-      <div id="block-list-{{ $id }}" class="sortable-container">
+      <div id="block-list-{{ $id }}">
         @foreach($blocks as $block)
           <div class="block" data-page-builder-id="{{ $id }}"
-               data-type="{{ $block->type }}" data-id="{{ $block->id }}"
+               data-block-id="{{ $block->id }}" data-type="{{ $block->type }}"
                data-is-layout="{{ $block->is_layout }}">
             {!! $block->icon !!} {{ $block->name }}
           </div>
@@ -66,22 +66,18 @@
 </div>
 
 @pushonce('css')
-  <link rel="stylesheet" type="text/css" href="{{ asset('packages/thinhnx/page-builder/css/page-builder.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('packages/thinhnx/page-builder/css/page-builder.min.css') }}">
 @endpushonce
 
 @pushonce('script')
   <script src="{{ asset('packages/thinhnx/page-builder/libs/SortableJS/Sortable.min.js') }}"></script>
-  <script src="{{ asset('packages/thinhnx/page-builder/js/page-builder.js') }}"></script>
+  <script src="{{ asset('packages/thinhnx/page-builder/js/page-builder.min.js') }}"></script>
 @endpushonce
 
 @push('script')
   <script>
     document.addEventListener('DOMContentLoaded', async function () {
-      await initPageBuilder('{{ $id }}', @json($initialBlocks), getContext);
+      await PageBuilder.init('{{ $id }}', @json($locales), @json($initialBlocks));
     });
-
-    function getContext() {
-      return {};
-    }
   </script>
 @endpush

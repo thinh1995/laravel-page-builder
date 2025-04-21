@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Thinhnx\LaravelPageBuilder\Tests\Unit\Controllers;
 
 use Illuminate\Support\Facades\View;
+use Thinhnx\LaravelPageBuilder\Models\Block;
 use Thinhnx\LaravelPageBuilder\Tests\TestCase;
 
 class PageBuilderControllerTest extends TestCase
@@ -35,9 +36,13 @@ class PageBuilderControllerTest extends TestCase
             'content' => 'test',
         ]);
 
+        $block = Block::where('type', 'text')->first();
+
         $response->assertOk();
         $this->assertJson(json_encode([
-            'data' => base64_encode(view('page-builder::blocks.text', ['content' => 'test'])->render())
+            'data' => base64_encode(
+                view('page-builder::blocks.text', ['block' => $block, 'content' => 'test'])->render()
+            )
         ]));
     }
 

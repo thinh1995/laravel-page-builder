@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="preview-modal-label">{{ __('page-builder.view.list_blocks') }}</h5>
+        <h5 class="modal-title" id="preview-modal-label">{{ __('page-builder.view.preview') }}</h5>
         <div class="switch-field">
           <input type="radio" id="device-desktop" name="device-select" value="desktop" checked/>
           <label for="device-desktop">
