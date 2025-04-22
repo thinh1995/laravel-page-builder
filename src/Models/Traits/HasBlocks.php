@@ -93,7 +93,7 @@ trait HasBlocks
                         'blockable_id',
                         'blockable_type'
                     )
-                    ->orderBy('order')
+                    ->orderByPivot('order')
                     ->withTimestamps();
     }
 
