@@ -7,7 +7,6 @@ namespace Thinhnx\LaravelPageBuilder\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Thinhnx\LaravelPageBuilder\Models\Block;
 use Throwable;
 
 class PageBuilderController extends Controller
@@ -23,15 +22,13 @@ class PageBuilderController extends Controller
         $request->validate(['type' => ['required', 'exists:' . config('page-builder.tables.block') . ',type']]);
 
         $type    = strtolower($request->get('type'));
-        $block   = Block::where('type', $type)->first();
+        $block   = app(config('page-builder.models.block'))::where('type', $type)->first();
         $content = $request->get('content') ?: null;
 
         if ($request->ajax()) {
             return response()->json([
                 'data' => base64_encode(
-                    view("page-builder::blocks.$type", compact('block', 'content'))
-                        ->withErrors([])
-                        ->render()
+                    view("page-builder::blocks.$type", compact('block', 'content'))->render()
                 ),
             ]);
         }
@@ -61,9 +58,7 @@ class PageBuilderController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => base64_encode(
-                    view('page-builder::preview', compact('locale', 'blocks', 'context'))
-                        ->withErrors([])
-                        ->render()
+                    view('page-builder::preview', compact('locale', 'blocks', 'context'))->render()
                 ),
             ]);
         }

@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Facade;
 use Thinhnx\LaravelPageBuilder\PageBuilder as PageBuilderSingleton;
 
 /**
- * @method static Illuminate\Contracts\View\View render(?Model $model = null)
+ * @method static \Illuminate\Contracts\View\View render(?\Illuminate\Database\Eloquent\Model $model = null)
+ * @method static mixed getBlocks()
  */
 class PageBuilder extends Facade
 {

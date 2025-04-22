@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimize the queries using in HasBlocks trait.
 - Check for memory leaks.
 
+## [1.1.1] 2025-04-22
+
+### Changed
+
+- Fix default middleware for routes is web.
+- Using config models instead of directive models.
+
 ## [1.1.0] 2025-04-21
 
 ### Added
