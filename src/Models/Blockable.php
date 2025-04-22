@@ -51,7 +51,7 @@ class Blockable extends Model
 
     public function block(): BelongsTo
     {
-        return $this->belongsTo(Block::class);
+        return $this->belongsTo(config('page-builder.models.block'), 'block_id');
     }
 
     public function blockable(): MorphTo

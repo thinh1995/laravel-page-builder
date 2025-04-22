@@ -10,11 +10,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Thinhnx\LaravelPageBuilder\Facades\PageBuilder;
 use Thinhnx\LaravelPageBuilder\Models\Block;
 use Thinhnx\LaravelPageBuilder\Models\Blockable;
 
 trait HasBlocks
 {
+    /**
+     * @return void
+     */
     public static function bootHasBlocks(): void
     {
         static::deleting(function (Model $model) {
@@ -28,11 +32,20 @@ trait HasBlocks
         });
     }
 
+    /**
+     * @return MorphMany
+     */
     public function blockItems(): MorphMany
     {
         return $this->morphMany(Blockable::class, 'blockable');
     }
 
+    /**
+     * @param array       $data
+     * @param string|null $locale
+     *
+     * @return void
+     */
     public function syncBlockItems(array $data, ?string $locale): void
     {
         $locale ??= config('page-builder.default_locale');
@@ -55,6 +68,11 @@ trait HasBlocks
         $this->afterBlockItemsSynced($data, $locale);
     }
 
+    /**
+     * @param string|null $locale
+     *
+     * @return BelongsToMany
+     */
     protected function whereBlocksByLocale(?string $locale): BelongsToMany
     {
         $locale ??= config('page-builder.default_locale');
@@ -62,6 +80,9 @@ trait HasBlocks
         return $this->blocks()->wherePivot('locale', $locale);
     }
 
+    /**
+     * @return MorphToMany
+     */
     public function blocks(): MorphToMany
     {
         return $this->morphToMany(Block::class, 'blockable', 'pagebuilder_blockables')
@@ -74,10 +95,16 @@ trait HasBlocks
                         'blockable_id',
                         'blockable_type'
                     )
-                    ->orderBy('pivot_order')
+                    ->orderBy('order')
                     ->withTimestamps();
     }
 
+    /**
+     * @param array  $data
+     * @param string $locale
+     *
+     * @return void
+     */
     protected function transformBlockItems(array &$data, string $locale): void
     {
         $blocks = app(config('page-builder.models.block'))::all();
@@ -94,19 +121,47 @@ trait HasBlocks
         }
     }
 
+    /**
+     * @param array $data
+     * @param Model $block
+     *
+     * @return void
+     */
     public function setFormatItem(array &$data, Model $block): void
     {
     }
 
+    /**
+     * @param array|Model $data
+     * @param Model       $block
+     *
+     * @return array|Model
+     */
     public function getFormatItem(array|Model $data, Model $block): array|Model
     {
         return $data;
     }
 
+    /**
+     * @param array $data
+     * @param       $locale
+     *
+     * @return void
+     */
     protected function afterBlockItemsSynced(array $data, $locale): void
     {
     }
 
+    /**
+     * @param int         $blockId
+     * @param string      $content
+     * @param int|null    $order
+     * @param array       $children
+     * @param int         $columnIndex
+     * @param string|null $locale
+     *
+     * @return void
+     */
     public function addBlockItem(
         int $blockId,
         string $content,
@@ -140,6 +195,16 @@ trait HasBlocks
         $this->afterBlockItemAdded($blockId, $content, $order, $children, $columnIndex, $locale);
     }
 
+    /**
+     * @param int    $blockId
+     * @param string $content
+     * @param int    $order
+     * @param array  $children
+     * @param int    $columnIndex
+     * @param string $locale
+     *
+     * @return void
+     */
     protected function afterBlockItemAdded(
         int $blockId,
         string $content,
@@ -150,6 +215,12 @@ trait HasBlocks
     ): void {
     }
 
+    /**
+     * @param int    $blockItemId
+     * @param string $locale
+     *
+     * @return void
+     */
     public function removeBlockItem(int $blockItemId, string $locale): void
     {
         $this->whereBlocksByLocale($locale)
@@ -161,15 +232,28 @@ trait HasBlocks
         $this->afterBlockItemRemoved($blockItemId, $locale);
     }
 
+    /**
+     * @param int    $blockableId
+     * @param string $locale
+     *
+     * @return void
+     */
     protected function afterBlockItemRemoved(int $blockableId, string $locale): void
     {
     }
 
+    /**
+     * @param string|array|null $locales
+     *
+     * @return Collection
+     */
     public function getBlockItems(string|array|null $locales = null): Collection
     {
+        $blocks = PageBuilder::getBlocks();
+
         $locales ??= config('page-builder.locales');
 
-        $query = Blockable::with('block');
+        $query = Blockable::query();
 
         if ($locales) {
             if (is_array($locales)) {
@@ -184,8 +268,8 @@ trait HasBlocks
                      ->orderBy('column_index')
                      ->orderBy('order')
                      ->get()
-                     ->transform(function ($item) {
-                         return $this->getFormatItem($item, $item->block);
+                     ->transform(function ($item) use ($blocks) {
+                         return $this->getFormatItem($item, $blocks->firstWhere('id', $item->block_id));
                      })
                      ->toTree();
     }

@@ -14,9 +14,7 @@ class Block extends Model
     use HasFactory;
     use Translatable;
 
-    public $translatedAttributes = ['name', 'description', 'icon'];
-
-    protected $with = ['translations'];
+    public array $translatedAttributes = ['name', 'description', 'icon'];
 
     protected $fillable = ['type', 'is_layout'];
 

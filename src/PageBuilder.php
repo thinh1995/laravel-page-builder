@@ -30,7 +30,7 @@ class PageBuilder
     {
         $id            = 'pb-' . Str::random(8);
         $locales       = $this->transformLocales($locales);
-        $blocks        = $this->getBlocks();
+        $blocks        = self::getBlocks();
         $initialBlocks = $this->getInitialBlocks($locales, $model);
 
         return $this->viewFactory->make('page-builder::page-builder', [
@@ -64,7 +64,7 @@ class PageBuilder
      *
      * @return mixed
      */
-    private function getBlocks(): mixed
+    public static function getBlocks(): mixed
     {
         if (config('page-builder.cache.enabled')) {
             return Cache::rememberForever('pagebuilder_blocks', function () {
@@ -88,7 +88,7 @@ class PageBuilder
         if (is_array($locales)) {
             foreach ($locales as $locale) {
                 $initialBlocks[$locale] = $model && method_exists($model, 'getBlockItems') ?
-                    $model->getBlockItems($locale)->toArray() : [];
+                    $this->transformBlockItems($model->getBlockItems($locale)) : [];
             }
 
             return $initialBlocks;
@@ -107,9 +107,11 @@ class PageBuilder
      */
     private function transformBlockItems(Collection $items): array
     {
-        $data = [];
+        $blocks = self::getBlocks();
+        $data   = [];
 
         foreach ($items as $item) {
+            $block  = $blocks->find($item->block_id);
             $data[] = [
                 'id'           => $item->id,
                 'content'      => $item->content,
@@ -117,8 +119,8 @@ class PageBuilder
                 'column_index' => $item->column_index,
                 'locale'       => $item->locale,
                 'block_id'     => $item->block_id,
-                'type'         => $item->block->type,
-                'is_layout'    => $item->block->is_layout,
+                'type'         => $block->type,
+                'is_layout'    => $block->is_layout,
                 'children'     => $this->transformBlockItems($item->children),
             ];
         }

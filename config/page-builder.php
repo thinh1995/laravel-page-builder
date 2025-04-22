@@ -14,7 +14,7 @@ return [
     'route'          => [
         'prefix'     => 'page-builder',
         'as'         => 'page-builder.',
-        'middleware' => [],
+        'middleware' => ['web'],
     ],
 
     // Name for tables

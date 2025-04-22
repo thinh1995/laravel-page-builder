@@ -29,9 +29,7 @@ class PageBuilderController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => base64_encode(
-                    view("page-builder::blocks.$type", compact('block', 'content'))
-                        ->withErrors([])
-                        ->render()
+                    view("page-builder::blocks.$type", compact('block', 'content'))->render()
                 ),
             ]);
         }
@@ -61,9 +59,7 @@ class PageBuilderController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => base64_encode(
-                    view('page-builder::preview', compact('locale', 'blocks', 'context'))
-                        ->withErrors([])
-                        ->render()
+                    view('page-builder::preview', compact('locale', 'blocks', 'context'))->render()
                 ),
             ]);
         }
