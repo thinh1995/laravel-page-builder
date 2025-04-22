@@ -30,7 +30,7 @@ class PageBuilder
     {
         $id            = 'pb-' . Str::random(8);
         $locales       = $this->transformLocales($locales);
-        $blocks        = self::getBlocks();
+        $blocks        = $this->getBlocks();
         $initialBlocks = $this->getInitialBlocks($locales, $model);
 
         return $this->viewFactory->make('page-builder::page-builder', [
@@ -64,7 +64,7 @@ class PageBuilder
      *
      * @return mixed
      */
-    public static function getBlocks(): mixed
+    public function getBlocks(): mixed
     {
         if (config('page-builder.cache.enabled')) {
             return Cache::rememberForever('pagebuilder_blocks', function () {
@@ -107,7 +107,7 @@ class PageBuilder
      */
     private function transformBlockItems(Collection $items): array
     {
-        $blocks = self::getBlocks();
+        $blocks = $this->getBlocks();
         $data   = [];
 
         foreach ($items as $item) {

@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Thinhnx\LaravelPageBuilder\Facades\PageBuilder;
-use Thinhnx\LaravelPageBuilder\Models\Block;
-use Thinhnx\LaravelPageBuilder\Models\Blockable;
 
 trait HasBlocks
 {
@@ -37,7 +35,7 @@ trait HasBlocks
      */
     public function blockItems(): MorphMany
     {
-        return $this->morphMany(Blockable::class, 'blockable');
+        return $this->morphMany(config('page-builder.models.blockable'), 'blockable');
     }
 
     /**
@@ -53,7 +51,7 @@ trait HasBlocks
         $this->transformBlockItems($data, $locale);
 
         foreach ($data as $index => $item) {
-            Blockable::create([
+            app(config('page-builder.models.blockable'))::create([
                 'block_id'       => $item['block_id'],
                 'blockable_id'   => $this->id,
                 'blockable_type' => self::class,
@@ -85,7 +83,7 @@ trait HasBlocks
      */
     public function blocks(): MorphToMany
     {
-        return $this->morphToMany(Block::class, 'blockable', 'pagebuilder_blockables')
+        return $this->morphToMany(config('page-builder.models.block'), 'blockable', 'pagebuilder_blockables')
                     ->withPivot(
                         'content',
                         'column_index',
@@ -190,7 +188,7 @@ trait HasBlocks
 
         $this->transformBlockItems($data, $locale);
 
-        Blockable::create($data[0]);
+        app(config('page-builder.models.blockable'))::create($data[0]);
 
         $this->afterBlockItemAdded($blockId, $content, $order, $children, $columnIndex, $locale);
     }
@@ -253,7 +251,7 @@ trait HasBlocks
 
         $locales ??= config('page-builder.locales');
 
-        $query = Blockable::query();
+        $query = app(config('page-builder.models.blockable'))::query();
 
         if ($locales) {
             if (is_array($locales)) {
