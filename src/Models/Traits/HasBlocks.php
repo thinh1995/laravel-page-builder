@@ -267,7 +267,12 @@ trait HasBlocks
                        ->orderBy('order')
                        ->get()
                        ->transform(function ($item) use ($blocks) {
-                           return $this->getFormatItem($item, $blocks->firstWhere('id', $item->block_id));
+                           $block             = $blocks->firstWhere('id', $item->block_id);
+                           $item              = $this->getFormatItem($item, $block);
+                           $item['type']      = $block->type;
+                           $item['is_layout'] = $block->is_layout;
+
+                           return $item;
                        });
 
         if ($buildTree) {

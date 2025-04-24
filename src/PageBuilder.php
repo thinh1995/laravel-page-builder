@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Kalnoy\Nestedset\Collection;
 
 class PageBuilder
 {
@@ -70,14 +69,14 @@ class PageBuilder
         if (is_array($locales)) {
             foreach ($locales as $locale) {
                 $initialBlocks[$locale] = $model && method_exists($model, 'getBlockItems') ?
-                    $this->transformBlockItems($model->getBlockItems($locale)) : [];
+                    $model->getBlockItems($locale) : [];
             }
 
             return $initialBlocks;
         }
 
         $initialBlocks[$locales] = $model && method_exists($model, 'getBlockItems') ?
-            $this->transformBlockItems($model->getBlockItems($locales)) : [];
+            $model->getBlockItems($locales) : [];
 
         return $initialBlocks;
     }
@@ -98,33 +97,5 @@ class PageBuilder
         }
 
         return $locales;
-    }
-
-    /**
-     * @param Collection $items
-     *
-     * @return array
-     */
-    private function transformBlockItems(Collection $items): array
-    {
-        $blocks = $this->getBlocks();
-        $data   = [];
-
-        foreach ($items as $item) {
-            $block  = $blocks->find($item->block_id);
-            $data[] = [
-                'id'           => $item->id,
-                'content'      => $item->content,
-                'order'        => $item->order,
-                'column_index' => $item->column_index,
-                'locale'       => $item->locale,
-                'block_id'     => $item->block_id,
-                'type'         => $block->type,
-                'is_layout'    => $block->is_layout,
-                'children'     => $this->transformBlockItems($item->children),
-            ];
-        }
-
-        return $data;
     }
 }
