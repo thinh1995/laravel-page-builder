@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745462608">
-  <project timestamp="1745462608">
+<coverage generated="1745463696">
+  <project timestamp="1745463696">
     <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/Console/CreateBlockCommand.php">
       <class name="Thinhnx\LaravelPageBuilder\Console\CreateBlockCommand" namespace="global">
         <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="20" coveredelements="20"/>
@@ -391,7 +391,7 @@
     </file>
     <file name="/Users/lucifer/Desktop/laravel-packages/laravel-page-builder/src/PageBuilder.php">
       <class name="Thinhnx\LaravelPageBuilder\PageBuilder" namespace="global">
-        <metrics complexity="16" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="23" elements="53" coveredelements="25"/>
+        <metrics complexity="17" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="23" elements="52" coveredelements="25"/>
       </class>
       <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="20" type="stmt" count="3"/>
@@ -428,11 +428,12 @@
       <line num="96" type="stmt" count="0"/>
       <line num="97" type="stmt" count="0"/>
       <line num="100" type="stmt" count="0"/>
-      <line num="108" type="method" name="transformBlockItems" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="108" type="method" name="transformBlockItems" visibility="private" complexity="2" crap="6" count="0"/>
       <line num="110" type="stmt" count="0"/>
-      <line num="112" type="stmt" count="0"/>
+      <line num="111" type="stmt" count="0"/>
       <line num="113" type="stmt" count="0"/>
       <line num="114" type="stmt" count="0"/>
+      <line num="115" type="stmt" count="0"/>
       <line num="116" type="stmt" count="0"/>
       <line num="117" type="stmt" count="0"/>
       <line num="118" type="stmt" count="0"/>
@@ -443,11 +444,9 @@
       <line num="123" type="stmt" count="0"/>
       <line num="124" type="stmt" count="0"/>
       <line num="125" type="stmt" count="0"/>
-      <line num="126" type="stmt" count="0"/>
-      <line num="127" type="stmt" count="0"/>
       <line num="128" type="stmt" count="0"/>
-      <metrics loc="131" ncloc="104" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="23" elements="53" coveredelements="25"/>
+      <metrics loc="131" ncloc="104" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="23" elements="52" coveredelements="25"/>
     </file>
-    <metrics files="11" loc="1038" ncloc="836" classes="10" methods="45" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="336" coveredstatements="294" elements="381" coveredelements="327"/>
+    <metrics files="11" loc="1038" ncloc="836" classes="10" methods="45" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="335" coveredstatements="294" elements="380" coveredelements="327"/>
   </project>
 </coverage>

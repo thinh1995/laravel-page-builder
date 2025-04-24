@@ -245,7 +245,7 @@ trait HasBlocks
      *
      * @return Collection
      */
-    public function getBlockItems(string|array|null $locales = null, bool $buildTree = false): Collection
+    public function getBlockItems(string|array|null $locales = null, bool $buildTree = true): Collection
     {
         $blocks = PageBuilder::getBlocks();
 
@@ -274,6 +274,6 @@ trait HasBlocks
             return $items->toTree();
         }
 
-        return $items->get();
+        return $items;
     }
 }

@@ -108,23 +108,23 @@ class PageBuilder
     private function transformBlockItems(Collection $items): array
     {
         $blocks = $this->getBlocks();
+        $data   = [];
 
-        return $items
-            ->transform(function ($item) use ($blocks) {
-                $block = $blocks->find($item->block_id);
+        foreach ($items as $item) {
+            $block  = $blocks->find($item->block_id);
+            $data[] = [
+                'id'           => $item->id,
+                'content'      => $item->content,
+                'order'        => $item->order,
+                'column_index' => $item->column_index,
+                'locale'       => $item->locale,
+                'block_id'     => $item->block_id,
+                'type'         => $block->type,
+                'is_layout'    => $block->is_layout,
+                'children'     => $this->transformBlockItems($item->children),
+            ];
+        }
 
-                return [
-                    'id'           => $item->id,
-                    'content'      => $item->content,
-                    'order'        => $item->order,
-                    'column_index' => $item->column_index,
-                    'locale'       => $item->locale,
-                    'block_id'     => $item->block_id,
-                    'type'         => $block->type,
-                    'is_layout'    => $block->is_layout,
-                ];
-            })
-            ->toTree()
-            ->toArray();
+        return $data;
     }
 }
