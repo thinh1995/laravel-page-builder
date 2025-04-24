@@ -26,7 +26,7 @@ class Page extends Model
         $data['content'] = $block->type === 'text' ? e($data['content']) : $data['content'];
     }
 
-    public function getFormatItem(array|Model $data, Model $block): array|Model
+    protected function getFormatItem(array|Model $data, Model $block): array|Model
     {
         $data['content'] = $block->type === 'text' ? htmlspecialchars_decode($data['content']) : $data['content'];
 

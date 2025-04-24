@@ -125,7 +125,7 @@ trait HasBlocks
      *
      * @return void
      */
-    public function setFormatItem(array &$data, Model $block): void
+    protected function setFormatItem(array &$data, Model $block): void
     {
     }
 
@@ -135,7 +135,7 @@ trait HasBlocks
      *
      * @return array|Model
      */
-    public function getFormatItem(array|Model $data, Model $block): array|Model
+    protected function getFormatItem(array|Model $data, Model $block): array|Model
     {
         return $data;
     }
@@ -245,7 +245,7 @@ trait HasBlocks
      *
      * @return Collection
      */
-    public function getBlockItems(string|array|null $locales = null): Collection
+    public function getBlockItems(string|array|null $locales = null, bool $buildTree = false): Collection
     {
         $blocks = PageBuilder::getBlocks();
 
@@ -261,14 +261,19 @@ trait HasBlocks
             }
         }
 
-        return $query->where('blockable_type', self::class)
-                     ->where('blockable_id', $this->id)
-                     ->orderBy('column_index')
-                     ->orderBy('order')
-                     ->get()
-                     ->transform(function ($item) use ($blocks) {
-                         return $this->getFormatItem($item, $blocks->firstWhere('id', $item->block_id));
-                     })
-                     ->toTree();
+        $items = $query->where('blockable_type', self::class)
+                       ->where('blockable_id', $this->id)
+                       ->orderBy('column_index')
+                       ->orderBy('order')
+                       ->get()
+                       ->transform(function ($item) use ($blocks) {
+                           return $this->getFormatItem($item, $blocks->firstWhere('id', $item->block_id));
+                       });
+
+        if ($buildTree) {
+            return $items->toTree();
+        }
+
+        return $items->get();
     }
 }
